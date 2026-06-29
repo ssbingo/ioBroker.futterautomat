@@ -1,6 +1,6 @@
 {
   "name": "iobroker.futterautomat",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Steuerung für umgebaute Futterautomaten",
   "author": {
     "name": "ssbingo",
@@ -38,19 +38,19 @@
     "@iobroker/dev-server": "^0.8.0",
     "@iobroker/eslint-config": "^2.3.4",
     "@iobroker/testing": "^5.2.2",
-    "@mui/icons-material": "^9.1.1",
-    "@mui/material": "^9.1.1",
+    "@mui/icons-material": "^6.5.0",
+    "@mui/material": "^6.5.0",
     "@tsconfig/node22": "^22.0.5",
     "@types/iobroker": "npm:@iobroker/types@^7.2.2",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^22.20.0",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
     "leaflet": "^1.9.4",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-leaflet": "^5.0.0",
-    "typescript": "~6.0.3"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "typescript": "~5.9.3"
   },
   "main": "main.js",
   "files": [

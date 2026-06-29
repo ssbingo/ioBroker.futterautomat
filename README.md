@@ -379,6 +379,10 @@ log level (Instances → futterautomat.x → log level) to **debug** or **silly*
 	### **WORK IN PROGRESS**
 -->
 
+### 0.1.5 (2026-06-29)
+* (ssbingo) Keep the admin UI stack on React 18 / MUI 6 / react-leaflet 4 (required by adapter-react-v5); revert incompatible major dependency updates and block them in dependabot
+* (ssbingo) Keep TypeScript on 5.x; adopt ioBroker/testing-action-check@v2 in CI
+
 ### 0.1.4 (2026-06-29)
 * (ssbingo) Fully translate the admin UI into all supported languages (repository checker E5606)
 

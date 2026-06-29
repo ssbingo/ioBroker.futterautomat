@@ -1,20 +1,20 @@
 {
 	"common": {
 		"name": "futterautomat",
-		"version": "0.1.4",
+		"version": "0.1.5",
 		"news": {
-			"0.1.4": {
-				"en": "Full admin UI translations for all supported languages (repository checker E5606).",
-				"de": "Vollständige Übersetzung der Admin-Oberfläche in alle unterstützten Sprachen (Repository-Checker E5606).",
-				"ru": "Полный перевод интерфейса администратора на все поддерживаемые языки (repository checker E5606).",
-				"pt": "Tradução completa da interface de administração para todos os idiomas suportados (repository checker E5606).",
-				"nl": "Volledige vertaling van de beheerinterface naar alle ondersteunde talen (repository checker E5606).",
-				"fr": "Traduction complète de l'interface d'administration dans toutes les langues prises en charge (repository checker E5606).",
-				"it": "Traduzione completa dell'interfaccia di amministrazione in tutte le lingue supportate (repository checker E5606).",
-				"es": "Traducción completa de la interfaz de administración a todos los idiomas compatibles (repository checker E5606).",
-				"pl": "Pełne tłumaczenie interfejsu administracyjnego na wszystkie obsługiwane języki (repository checker E5606).",
-				"uk": "Повний переклад інтерфейсу адміністратора всіма підтримуваними мовами (repository checker E5606).",
-				"zh-cn": "管理界面完整翻译为所有支持的语言（仓库检查器 E5606）。"
+			"0.1.5": {
+				"en": "Keep the admin UI stack on React 18 / MUI 6 (required by adapter-react-v5); revert incompatible major dependency bumps and block them in dependabot.",
+				"de": "Admin-UI-Stack auf React 18 / MUI 6 halten (von adapter-react-v5 verlangt); inkompatible Major-Updates zurückgenommen und in Dependabot gesperrt.",
+				"ru": "Стек интерфейса администратора остаётся на React 18 / MUI 6 (требуется adapter-react-v5); несовместимые мажорные обновления отменены и заблокированы в dependabot.",
+				"pt": "Manter a interface de administração em React 18 / MUI 6 (exigido pelo adapter-react-v5); reverter atualizações maiores incompatíveis e bloqueá-las no dependabot.",
+				"nl": "De beheerinterface op React 18 / MUI 6 houden (vereist door adapter-react-v5); incompatibele major-updates teruggedraaid en geblokkeerd in dependabot.",
+				"fr": "Conserver l'interface d'administration sur React 18 / MUI 6 (requis par adapter-react-v5) ; annuler les montées de version majeures incompatibles et les bloquer dans dependabot.",
+				"it": "Mantieni l'interfaccia di amministrazione su React 18 / MUI 6 (richiesto da adapter-react-v5); annullati gli aggiornamenti major incompatibili e bloccati in dependabot.",
+				"es": "Mantener la interfaz de administración en React 18 / MUI 6 (requerido por adapter-react-v5); revertir actualizaciones mayores incompatibles y bloquearlas en dependabot.",
+				"pl": "Utrzymanie interfejsu administracyjnego na React 18 / MUI 6 (wymagane przez adapter-react-v5); cofnięcie niekompatybilnych aktualizacji major i zablokowanie ich w dependabot.",
+				"uk": "Залишити інтерфейс адміністратора на React 18 / MUI 6 (потрібно adapter-react-v5); скасовано несумісні мажорні оновлення та заблоковано їх у dependabot.",
+				"zh-cn": "管理界面保持在 React 18 / MUI 6（adapter-react-v5 要求）；回退不兼容的大版本升级并在 dependabot 中屏蔽。"
 			}
 		},
 		"titleLang": {
