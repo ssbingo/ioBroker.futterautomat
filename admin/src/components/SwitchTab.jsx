@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
 	Box,
@@ -13,9 +13,12 @@ import {
 	IconButton,
 	Tooltip,
 	Divider,
+	CircularProgress,
+	Alert,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { I18n } from '@iobroker/adapter-react-v5';
 
 function Section({ title, children }) {
@@ -44,10 +47,13 @@ function toNumberOrNull(value) {
 }
 
 function SwitchTab(props) {
-	const { sw, onChange, native } = props;
+	const { sw, onChange, native, socket, instanceId } = props;
 
 	const mode = sw.mode || 'times';
 	const times = Array.isArray(sw.times) ? sw.times : [];
+
+	const [feedBusy, setFeedBusy] = useState(false);
+	const [feedMsg, setFeedMsg] = useState(null); // { severity, text }
 
 	const updateTime = (index, value) => {
 		const next = times.slice();
@@ -57,8 +63,60 @@ function SwitchTab(props) {
 	const addTime = () => onChange({ times: [...times, '12:00'] });
 	const removeTime = (index) => onChange({ times: times.filter((_, i) => i !== index) });
 
+	const feedNow = async () => {
+		setFeedBusy(true);
+		setFeedMsg(null);
+		try {
+			const res = await socket.sendTo(instanceId, 'feedNow', {
+				switchId: sw.id,
+				durationSec: Number(sw.manualDurationSec ?? sw.durationSec ?? 0),
+			});
+			if (res && res.error) {
+				setFeedMsg({ severity: 'error', text: res.error });
+			} else {
+				setFeedMsg({ severity: 'success', text: I18n.t('Feeding started') });
+			}
+		} catch (e) {
+			setFeedMsg({ severity: 'error', text: `${I18n.t('Could not start feeding')}: ${e}` });
+		}
+		setFeedBusy(false);
+	};
+
 	return (
 		<Box>
+			{/* Manual feeding */}
+			<Section title={I18n.t('Manual feeding')}>
+				<Box sx={{ display: 'flex', gap: 2, alignItems: 'center', flexWrap: 'wrap' }}>
+					<TextField
+						variant="standard"
+						type="number"
+						label={I18n.t('Manual feeding duration (seconds)')}
+						value={sw.manualDurationSec ?? sw.durationSec ?? 5}
+						onChange={(e) => onChange({ manualDurationSec: Number(e.target.value) || 0 })}
+					/>
+					<Button
+						variant="contained"
+						color="primary"
+						size="large"
+						startIcon={feedBusy ? <CircularProgress size={20} color="inherit" /> : <RestaurantIcon />}
+						disabled={feedBusy || !sw.objectId}
+						onClick={feedNow}
+					>
+						{I18n.t('Feed now')}
+					</Button>
+				</Box>
+				{!sw.objectId ? (
+					<Typography variant="caption" color="textSecondary" sx={{ display: 'block', mt: 1 }}>
+						{I18n.t('Select a switch object in the general settings first.')}
+					</Typography>
+				) : null}
+				{feedMsg ? (
+					<Alert severity={feedMsg.severity} sx={{ mt: 1 }} onClose={() => setFeedMsg(null)}>
+						{feedMsg.text}
+					</Alert>
+				) : null}
+			</Section>
+
 			{/* Mode */}
 			<Section title={I18n.t('Feeding schedule')}>
 				<RadioGroup row value={mode} onChange={(e) => onChange({ mode: e.target.value })}>
@@ -245,6 +303,85 @@ function SwitchTab(props) {
 					label={I18n.t('Manual trigger ignores all blocks')}
 				/>
 			</Section>
+
+			{/* Switching supervision */}
+			<Section title={I18n.t('Switching supervision')}>
+				<FormControlLabel
+					control={
+						<Checkbox
+							checked={sw.verifyEnabled !== false}
+							onChange={(e) => onChange({ verifyEnabled: e.target.checked })}
+						/>
+					}
+					label={I18n.t('Verify that the switch actually turns on and off')}
+				/>
+				<Typography variant="caption" color="textSecondary" sx={{ display: 'block', mb: 1 }}>
+					{I18n.t('Only works if the switch reports its real state back (acknowledged / ack=true).')}
+				</Typography>
+				<TextField
+					variant="standard"
+					type="number"
+					label={I18n.t('Verification timeout (seconds)')}
+					disabled={sw.verifyEnabled === false}
+					value={sw.verifyTimeoutSec ?? 5}
+					onChange={(e) => onChange({ verifyTimeoutSec: Number(e.target.value) || 0 })}
+				/>
+			</Section>
+
+			{/* Telegram notifications */}
+			<Section title={I18n.t('Telegram notifications')}>
+				<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 1 }}>
+					<TextField
+						variant="standard"
+						label={I18n.t('Telegram instance (e.g. telegram.0)')}
+						value={sw.telegramInstance || ''}
+						onChange={(e) => onChange({ telegramInstance: e.target.value })}
+						sx={{ minWidth: 200 }}
+					/>
+					<TextField
+						variant="standard"
+						label={I18n.t('Telegram recipient (optional)')}
+						value={sw.telegramUser || ''}
+						onChange={(e) => onChange({ telegramUser: e.target.value })}
+						sx={{ minWidth: 200 }}
+					/>
+				</Box>
+				<Typography variant="caption" color="textSecondary" sx={{ display: 'block', mb: 1 }}>
+					{I18n.t('Leave the instance empty to disable Telegram for this switch.')}
+				</Typography>
+				<FormControlLabel
+					control={
+						<Checkbox
+							checked={!!sw.notifySuccess}
+							disabled={!sw.telegramInstance}
+							onChange={(e) => onChange({ notifySuccess: e.target.checked })}
+						/>
+					}
+					label={I18n.t('Notify on successful feeding')}
+				/>
+				<br />
+				<FormControlLabel
+					control={
+						<Checkbox
+							checked={sw.notifyOnFail !== false}
+							disabled={!sw.telegramInstance}
+							onChange={(e) => onChange({ notifyOnFail: e.target.checked })}
+						/>
+					}
+					label={I18n.t('Notify if feeding could not be performed')}
+				/>
+				<br />
+				<FormControlLabel
+					control={
+						<Checkbox
+							checked={sw.notifyOffFail !== false}
+							disabled={!sw.telegramInstance}
+							onChange={(e) => onChange({ notifyOffFail: e.target.checked })}
+						/>
+					}
+					label={I18n.t('Notify on switch-off fault')}
+				/>
+			</Section>
 		</Box>
 	);
 }
@@ -253,6 +390,8 @@ SwitchTab.propTypes = {
 	sw: PropTypes.object.isRequired,
 	onChange: PropTypes.func.isRequired,
 	native: PropTypes.object.isRequired,
+	socket: PropTypes.object.isRequired,
+	instanceId: PropTypes.string.isRequired,
 };
 
 export default SwitchTab;

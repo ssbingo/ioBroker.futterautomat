@@ -126,18 +126,13 @@ class Futterautomat extends utils.Adapter {
 			await this.setupTemperatureSources();
 
 			// --- switch-state supervision: subscribe to the controlled foreign states ---
-			const verify = this.config.verifyEnabled !== false;
-			if (verify) {
-				for (const sw of this.switches) {
-					if (sw.enabled && sw.objectId) {
-						this.subscribeForeignStates(sw.objectId);
-					}
+			for (const sw of this.switches) {
+				if (sw.enabled && sw.objectId && sw.verifyEnabled !== false) {
+					this.subscribeForeignStates(sw.objectId);
+					this.log.debug(
+						`Supervision enabled for ${this.swLabel(sw)} (timeout ${Number(sw.verifyTimeoutSec) || 5}s).`,
+					);
 				}
-				this.log.debug(
-					`Switch supervision enabled (timeout ${Number(this.config.verifyTimeoutSec) || 5}s); subscribed to switch states.`,
-				);
-			} else {
-				this.log.debug('Switch supervision disabled.');
 			}
 
 			// --- subscribe to our own manual trigger states ---
@@ -582,8 +577,9 @@ class Futterautomat extends utils.Adapter {
 	/**
 	 * @param {ioBroker.FutterautomatSwitchConfig} sw - switch configuration
 	 * @param {boolean} ignoreBlocks - if true, temperature/night blocks are skipped
+	 * @param {number | null} [durationOverrideSec] - overrides the configured duration (manual button)
 	 */
-	async feed(sw, ignoreBlocks) {
+	async feed(sw, ignoreBlocks, durationOverrideSec = null) {
 		if (!sw.objectId) {
 			this.log.warn(`Switch ${this.swLabel(sw)} has no target object, skipping.`);
 			return;
@@ -603,8 +599,13 @@ class Futterautomat extends utils.Adapter {
 			return;
 		}
 
-		const verify = this.config.verifyEnabled !== false;
-		const seconds = Number(sw.durationSec) || 0;
+		const verify = sw.verifyEnabled !== false;
+		const seconds =
+			durationOverrideSec !== undefined &&
+			durationOverrideSec !== null &&
+			!Number.isNaN(Number(durationOverrideSec))
+				? Math.max(0, Number(durationOverrideSec))
+				: Number(sw.durationSec) || 0;
 		this.feedingBusy.add(sw.id);
 		try {
 			// --- switch ON ---
@@ -625,7 +626,9 @@ class Futterautomat extends utils.Adapter {
 					this.log.error(
 						`Feeding of ${this.swLabel(sw)} could not be performed - switch did not confirm ON. Check the switch!`,
 					);
-					await this.reportResult(sw, true, 'Fütterung konnte nicht durchgeführt werden. Schalter prüfen!');
+					const failMsg = 'Fütterung konnte nicht durchgeführt werden. Schalter prüfen!';
+					await this.reportResult(sw, true, failMsg);
+					this.notify(sw, 'onFail', failMsg);
 					return;
 				}
 				this.log.debug(`${this.swLabel(sw)}: ON confirmed by target.`);
@@ -654,7 +657,9 @@ class Futterautomat extends utils.Adapter {
 					this.log.error(
 						`Fault: ${this.swLabel(sw)} did not switch OFF as planned (still ON?). Check the switch!`,
 					);
-					await this.reportResult(sw, true, 'Störung Abschaltung Futterautomat!');
+					const offFailMsg = 'Störung Abschaltung Futterautomat!';
+					await this.reportResult(sw, true, offFailMsg);
+					this.notify(sw, 'offFail', offFailMsg);
 					return;
 				}
 				this.log.debug(`${this.swLabel(sw)}: OFF confirmed by target.`);
@@ -663,6 +668,7 @@ class Futterautomat extends utils.Adapter {
 			// --- Scenario 1: everything worked ---
 			const okMsg = `Fütterung wurde für ${seconds}s ausgelöst.`;
 			await this.reportResult(sw, false, okMsg);
+			this.notify(sw, 'success', okMsg);
 			this.log.info(`${this.swLabel(sw)}: ${okMsg}`);
 		} finally {
 			this.feedingBusy.delete(sw.id);
@@ -680,7 +686,7 @@ class Futterautomat extends utils.Adapter {
 	 */
 	verifyState(sw, expectOn) {
 		const expected = coerce(expectOn ? (sw.onValue ?? true) : (sw.offValue ?? false));
-		const timeoutMs = Math.max(1, Number(this.config.verifyTimeoutSec) || 5) * 1000;
+		const timeoutMs = Math.max(1, Number(sw.verifyTimeoutSec) || 5) * 1000;
 		return new Promise(resolve => {
 			const timer = setTimeout(() => {
 				this.verifyWatchers.delete(sw.objectId);
@@ -723,6 +729,34 @@ class Futterautomat extends utils.Adapter {
 	async reportResult(sw, isError, message) {
 		await this.setStateAsync(`switches.${sw.id}.lastResult`, { val: message, ack: true });
 		await this.setStateAsync(`switches.${sw.id}.error`, { val: isError, ack: true });
+	}
+
+	/**
+	 * Sends a supervision message to the switch's configured Telegram instance,
+	 * if a recipient is configured and the message type is enabled for this switch.
+	 *
+	 * @param {ioBroker.FutterautomatSwitchConfig} sw - switch configuration
+	 * @param {'success' | 'onFail' | 'offFail'} type - message category
+	 * @param {string} message - the text to send
+	 */
+	notify(sw, type, message) {
+		const instance = sw.telegramInstance;
+		if (!instance) {
+			return;
+		}
+		const want = type === 'success' ? sw.notifySuccess : type === 'onFail' ? sw.notifyOnFail : sw.notifyOffFail;
+		if (!want) {
+			this.log.silly(`Notification "${type}" for ${this.swLabel(sw)} is disabled.`);
+			return;
+		}
+		const text = `${sw.name || sw.id}: ${message}`;
+		const payload = sw.telegramUser ? { text, user: sw.telegramUser } : { text };
+		this.log.debug(`Sending Telegram notification via ${instance} for ${this.swLabel(sw)}: ${text}`);
+		try {
+			this.sendTo(instance, payload);
+		} catch (e) {
+			this.log.warn(`Could not send Telegram message via ${instance}: ${e.message}`);
+		}
 	}
 
 	/**
@@ -860,6 +894,32 @@ class Futterautomat extends utils.Adapter {
 			return;
 		}
 		this.log.debug(`Message received: command="${obj.command}" from "${obj.from}".`);
+		if (obj.command === 'feedNow') {
+			const sid = obj.message && obj.message.switchId;
+			const durationSec = obj.message && obj.message.durationSec;
+			const sw = this.switches.find(s => s.id === sid);
+			if (!sw) {
+				this.log.warn(`Manual feed request for unknown switch id "${sid}" (save the configuration first?).`);
+				if (obj.callback) {
+					this.sendTo(
+						obj.from,
+						obj.command,
+						{ error: 'Switch not found. Please save the configuration first.' },
+						obj.callback,
+					);
+				}
+				return;
+			}
+			this.log.info(`Manual feeding (button) for ${this.swLabel(sw)} for ${Number(durationSec) || 0}s.`);
+			// run the feeding asynchronously; answer the UI immediately
+			this.feed(sw, !!sw.manualIgnoresBlocks, durationSec).catch(e =>
+				this.log.error(`Manual feeding failed: ${e.message}`),
+			);
+			if (obj.callback) {
+				this.sendTo(obj.from, obj.command, { ok: true }, obj.callback);
+			}
+			return;
+		}
 		if (obj.command === 'geocode') {
 			const query = obj.message && obj.message.query;
 			if (!query) {

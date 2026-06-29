@@ -40,6 +40,22 @@ declare global {
 			respectNight: boolean;
 			/** Manual trigger ignores temperature/night blocks. */
 			manualIgnoresBlocks: boolean;
+			/** Verify (read back) that this switch actually turned on and off. */
+			verifyEnabled: boolean;
+			/** Timeout in seconds to wait for the acknowledged on/off confirmation. */
+			verifyTimeoutSec: number;
+			/** Telegram instance id used for this switch, e.g. "telegram.0" (empty = off). */
+			telegramInstance: string;
+			/** Optional Telegram recipient (user/chat name) for this switch; empty = all. */
+			telegramUser: string;
+			/** Send a Telegram message when a feeding completed successfully. */
+			notifySuccess: boolean;
+			/** Send a Telegram message when feeding could not be performed (no ON). */
+			notifyOnFail: boolean;
+			/** Send a Telegram message when the switch did not turn OFF again. */
+			notifyOffFail: boolean;
+			/** Duration in seconds used by the manual "feed now" button. */
+			manualDurationSec: number;
 		}
 
 		interface AdapterConfig {
@@ -57,10 +73,6 @@ declare global {
 			airTempObjectId: string;
 			waterTempEnabled: boolean;
 			waterTempObjectId: string;
-			/** Verify (read back) that the switch actually turned on and off. */
-			verifyEnabled: boolean;
-			/** Timeout in seconds to wait for the acknowledged on/off confirmation. */
-			verifyTimeoutSec: number;
 			switches: FutterautomatSwitchConfig[];
 		}
 	}

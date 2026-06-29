@@ -56,5 +56,18 @@
 	"Switching supervision": "Switching supervision",
 	"Verify that the switch actually turns on and off": "Verify that the switch actually turns on and off",
 	"Only works if the switch reports its real state back (acknowledged / ack=true).": "Only works if the switch reports its real state back (acknowledged / ack=true).",
-	"Verification timeout (seconds)": "Verification timeout (seconds)"
+	"Verification timeout (seconds)": "Verification timeout (seconds)",
+	"Manual feeding": "Manual feeding",
+	"Manual feeding duration (seconds)": "Manual feeding duration (seconds)",
+	"Feed now": "Feed now",
+	"Select a switch object in the general settings first.": "Select a switch object in the general settings first.",
+	"Feeding started": "Feeding started",
+	"Could not start feeding": "Could not start feeding",
+	"Telegram notifications": "Telegram notifications",
+	"Telegram instance (e.g. telegram.0)": "Telegram instance (e.g. telegram.0)",
+	"Telegram recipient (optional)": "Telegram recipient (optional)",
+	"Leave the instance empty to disable Telegram for this switch.": "Leave the instance empty to disable Telegram for this switch.",
+	"Notify on successful feeding": "Notify on successful feeding",
+	"Notify if feeding could not be performed": "Notify if feeding could not be performed",
+	"Notify on switch-off fault": "Notify on switch-off fault"
 }

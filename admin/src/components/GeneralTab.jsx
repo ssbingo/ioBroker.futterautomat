@@ -179,30 +179,6 @@ function GeneralTab(props) {
 				</Box>
 			</Section>
 
-			{/* Switching supervision */}
-			<Section title={I18n.t('Switching supervision')}>
-				<FormControlLabel
-					control={
-						<Checkbox
-							checked={native.verifyEnabled !== false}
-							onChange={(e) => onChange('verifyEnabled', e.target.checked)}
-						/>
-					}
-					label={I18n.t('Verify that the switch actually turns on and off')}
-				/>
-				<Typography variant="caption" color="textSecondary" sx={{ display: 'block', mb: 1 }}>
-					{I18n.t('Only works if the switch reports its real state back (acknowledged / ack=true).')}
-				</Typography>
-				<TextField
-					variant="standard"
-					type="number"
-					label={I18n.t('Verification timeout (seconds)')}
-					disabled={native.verifyEnabled === false}
-					value={native.verifyTimeoutSec ?? 5}
-					onChange={(e) => onChange('verifyTimeoutSec', Number(e.target.value) || 0)}
-				/>
-			</Section>
-
 			{/* Switches roster */}
 			<Section title={`${I18n.t('Switches')} (${switches.length}/${MAX_SWITCHES})`}>
 				{switches.length === 0 ? (

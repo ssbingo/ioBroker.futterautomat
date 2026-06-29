@@ -39,6 +39,14 @@ function createSwitch(switches) {
 		airMax: null,
 		respectNight: true,
 		manualIgnoresBlocks: false,
+		verifyEnabled: true,
+		verifyTimeoutSec: 5,
+		telegramInstance: '',
+		telegramUser: '',
+		notifySuccess: false,
+		notifyOnFail: true,
+		notifyOffFail: true,
+		manualDurationSec: 5,
 	};
 }
 
@@ -107,6 +115,8 @@ function Settings(props) {
 					sw={activeSwitch}
 					native={native}
 					onChange={(patch) => updateSwitch(activeSwitchIndex, patch)}
+					socket={socket}
+					instanceId={instanceId}
 				/>
 			) : null}
 		</Box>

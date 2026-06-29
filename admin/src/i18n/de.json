@@ -56,5 +56,18 @@
 	"Verify that the switch actually turns on and off": "Prüfen, ob der Schalter tatsächlich ein- und ausschaltet",
 	"Only works if the switch reports its real state back (acknowledged / ack=true).": "Funktioniert nur, wenn der Schalter seinen Ist-Zustand zurückmeldet (bestätigt / ack=true).",
 	"Verification timeout (seconds)": "Überwachungs-Timeout (Sekunden)",
+	"Manual feeding": "Manuelle Fütterung",
+	"Manual feeding duration (seconds)": "Dauer der manuellen Fütterung (Sekunden)",
+	"Feed now": "Jetzt füttern",
+	"Select a switch object in the general settings first.": "Wähle zuerst in den Grundeinstellungen ein Schalter-Objekt aus.",
+	"Feeding started": "Fütterung gestartet",
+	"Could not start feeding": "Fütterung konnte nicht gestartet werden",
+	"Telegram notifications": "Telegram-Benachrichtigungen",
+	"Telegram instance (e.g. telegram.0)": "Telegram-Instanz (z. B. telegram.0)",
+	"Telegram recipient (optional)": "Telegram-Empfänger (optional)",
+	"Leave the instance empty to disable Telegram for this switch.": "Instanz leer lassen, um Telegram für diesen Schalter zu deaktivieren.",
+	"Notify on successful feeding": "Bei erfolgreicher Fütterung benachrichtigen",
+	"Notify if feeding could not be performed": "Benachrichtigen, wenn Fütterung nicht durchgeführt werden konnte",
+	"Notify on switch-off fault": "Bei Störung der Abschaltung benachrichtigen",
 	"futterautomat adapter settings": "Adaptereinstellungen für Futterautomat"
 }
