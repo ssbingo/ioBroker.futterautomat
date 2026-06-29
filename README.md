@@ -20,51 +20,57 @@
 
 ## futterautomat adapter for ioBroker
 
-Steuerung für (umgebaute) Futterautomaten: Der Adapter schaltet bis zu **5 frei wählbare
-Schalter** (vorhandene ioBroker-Objekte) zeitgesteuert für eine einstellbare Dauer ein und
-wieder aus. Optional werden Luft- und Wassertemperatur berücksichtigt, und über die
-Geokoordinaten wird der Sonnenstand berechnet, damit nachts nicht gefüttert wird.
+Control for (converted) automatic feeders. The adapter switches up to **5 freely selectable
+switches** (existing ioBroker objects) on a schedule for a configurable duration ("feeding").
+Optionally it evaluates air and water temperature, and uses your geo-coordinates to calculate
+the sun position so it never feeds at night.
 
-### Funktionen
+### Features
 
-* Bis zu 5 Schalter, jeweils mit frei wählbarem Namen (= eigener Konfigurations-Tab).
-* Zwei Fütterungsmodi je Schalter:
-  * **Feste Zeiten** (z. B. 08:00 und 18:00).
-  * **Intervall innerhalb eines Zeitraums** (z. B. alle 60 Min zwischen 08:00 und 18:00).
-* Einstellbare **Fütterungsdauer in Sekunden** je Schalter.
-* **Temperatursperren**: Fütterung unter- bzw. oberhalb frei wählbarer Wasser- und/oder
-  Lufttemperaturen blockieren.
-* **Nachtsperre** über Sonnenauf-/-untergang mit konfigurierbarem Offset (morgens/abends).
-* **Manueller Auslöser** (`feedNow`) je Schalter, optional unter Umgehung aller Sperren.
+* Up to 5 switches, each with a free name (= its own configuration tab).
+* Two feeding modes per switch:
+  * **Fixed times** (e.g. 08:00 and 18:00).
+  * **Interval within a time window** (e.g. every 60 min between 08:00 and 18:00).
+* Configurable **feeding duration in seconds** per switch.
+* **Temperature blocking**: block feeding below or above freely selectable water and/or air
+  temperatures.
+* **Night protection** via sunrise/sunset with a configurable offset (morning/evening).
+* **Manual trigger** (`feedNow`) per switch and a **"Feed now" button** with a selectable
+  duration; optionally ignoring all blocks.
+* **Switching supervision** per switch: verifies that the switch actually turns on and off
+  (needs a switch that reports its state back, `ack=true`), with optional **Telegram
+  notifications** (successful feeding / could-not-feed / switch-off fault).
 
-### Konfiguration
+### Configuration
 
-**Tab „Grundeinstellungen"**
-* **Standort (verpflichtend)**: Systemeinstellungen übernehmen *oder* spezifisch festlegen –
-  per Adresssuche und Markierung auf einer OpenStreetMap-Karte (kein API-Key nötig).
-* **Sonnenfenster**: Offsets in Minuten nach Sonnenaufgang / vor Sonnenuntergang.
-* **Temperaturquellen**: Luft- und Wassertemperatur aktivieren und das jeweilige Objekt wählen.
-* **Schalter**: Schalter hinzufügen (max. 5), Namen vergeben, Objekt auswählen, aktivieren.
+**"General settings" tab**
+* **Location (mandatory)**: use the ioBroker system settings *or* define it specifically –
+  via address search and a marker on an OpenStreetMap map (no API key needed).
+* **Sun window**: offsets in minutes after sunrise / before sunset.
+* **Temperature sources**: enable air and water temperature and pick the respective object.
+* **Switches**: add switches (max. 5), name them, select the object, activate.
 
-**Tab je Schalter** (erscheint dynamisch, beschriftet mit dem Schalternamen)
-* Modus (feste Zeiten / Intervall), Zeiten bzw. Zeitfenster + Intervall, Fütterungsdauer,
-  Temperatursperren, Nacht-/Manuell-Optionen.
+**Per-switch tab** (created dynamically, labelled with the switch name)
+* Mode (fixed times / interval), times resp. time window + interval, feeding duration,
+  temperature blocking, night/manual options, switching supervision, Telegram notifications,
+  and a manual feed button.
 
-### Datenpunkte
+### Data points
 
 Global:
-* `info.connection` – Adapter läuft / Konfiguration gültig
-* `airTemperature`, `waterTemperature` – aktuell erfasste Temperaturen
-* `sunrise`, `sunset` – berechnete Zeiten
+* `info.connection` – adapter running / configuration valid
+* `airTemperature`, `waterTemperature` – currently measured temperatures
+* `sunrise`, `sunset` – calculated times
 
-Pro Schalter unter `switches.<id>.`:
-* `feedingActive` – Fütterung läuft gerade
-* `lastFeeding`, `nextFeeding` – letzte / nächste Fütterung
-* `blocked`, `blockReason` – aktuell blockiert + Grund
-* `feedNow` – manueller Auslöser (beschreibbar)
+Per switch under `switches.<id>.`:
+* `feedingActive` – feeding currently running
+* `lastFeeding`, `nextFeeding` – last / next feeding
+* `blocked`, `blockReason` – currently blocked + reason
+* `lastResult`, `error` – result of the last feeding attempt + fault flag
+* `feedNow` – manual trigger (writable)
 
-> Hinweis: Adresssuche/Geocoding (Nominatim) und die Kartenkacheln benötigen einen
-> Internetzugang. Das Geocoding läuft im Adapter-Backend; die Instanz muss dafür laufen.
+> Note: address search/geocoding (Nominatim) and the map tiles need internet access. Geocoding
+> runs in the adapter backend; the instance must be running for it.
 
 ## Changelog
 <!--
@@ -74,6 +80,23 @@ Pro Schalter unter `switches.<id>.`:
 
 ### **WORK IN PROGRESS**
 * (ssbingo) initial release
+
+---
+
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
+## Documentation
+
+- 🇩🇪 [Deutsche Dokumentation](doc/de/README.md)
+- 🇷🇺 [Документация на русском](doc/ru/README.md)
+- 🇳🇱 [Nederlandse documentatie](doc/nl/README.md)
+- 🇫🇷 [Documentation française](doc/fr/README.md)
+- 🇮🇹 [Documentazione italiana](doc/it/README.md)
+- 🇪🇸 [Documentación en español](doc/es/README.md)
+- 🇵🇱 [Dokumentacja polska](doc/pl/README.md)
+- 🇵🇹 [Documentação portuguesa](doc/pt/README.md)
+- 🇺🇦 [Документація українською](doc/uk/README.md)
+- 🇨🇳 [简体中文文档](doc/zh-cn/README.md)
 
 ## License
 MIT License

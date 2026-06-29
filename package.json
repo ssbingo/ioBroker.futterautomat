@@ -56,8 +56,10 @@
     "admin{,/!(src)/**}/!(tsconfig|tsconfig.*|.eslintrc).{json,json5}",
     "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
     "admin/build/",
+    "doc/",
     "lib/",
     "www/",
+    "CHANGELOG_OLD.md",
     "io-package.json",
     "LICENSE",
     "main.js"
