@@ -1,20 +1,20 @@
 {
 	"common": {
 		"name": "futterautomat",
-		"version": "0.0.1",
+		"version": "0.1.0",
 		"news": {
-			"0.0.1": {
-				"en": "initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "Начальная версия",
-				"pt": "lançamento inicial",
-				"nl": "Eerste uitgave",
-				"fr": "Première version",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"uk": "Початкова версія",
-				"zh-cn": "首次出版"
+			"0.1.0": {
+				"en": "Initial feature release: scheduling, temperature and night protection, switching supervision, Telegram notifications, manual feeding and full documentation.",
+				"de": "Erste Funktionsversion: Zeitsteuerung, Temperatur- und Nachtsperre, Schaltüberwachung, Telegram-Benachrichtigungen, manuelle Fütterung und vollständige Dokumentation.",
+				"ru": "Первый функциональный выпуск: расписание, блокировка по температуре и ночью, контроль переключения, уведомления Telegram, ручное кормление и полная документация.",
+				"pt": "Primeira versão funcional: agendamento, bloqueio por temperatura e noturno, supervisão da comutação, notificações Telegram, alimentação manual e documentação completa.",
+				"nl": "Eerste functionele versie: planning, temperatuur- en nachtblokkering, schakelbewaking, Telegram-meldingen, handmatige voedering en volledige documentatie.",
+				"fr": "Première version fonctionnelle : planification, blocage par température et nocturne, surveillance de la commutation, notifications Telegram, distribution manuelle et documentation complète.",
+				"it": "Prima versione funzionale: pianificazione, blocco per temperatura e notturno, supervisione della commutazione, notifiche Telegram, alimentazione manuale e documentazione completa.",
+				"es": "Primera versión funcional: programación, bloqueo por temperatura y nocturno, supervisión de conmutación, notificaciones de Telegram, alimentación manual y documentación completa.",
+				"pl": "Pierwsza wersja funkcjonalna: harmonogram, blokada temperaturowa i nocna, nadzór przełączania, powiadomienia Telegram, ręczne karmienie i pełna dokumentacja.",
+				"uk": "Перший функціональний випуск: розклад, блокування за температурою та вночі, нагляд за перемиканням, сповіщення Telegram, ручне годування та повна документація.",
+				"zh-cn": "首个功能版本：定时计划、温度与夜间阻止、开关监控、Telegram 通知、手动喂食以及完整文档。"
 			}
 		},
 		"titleLang": {
