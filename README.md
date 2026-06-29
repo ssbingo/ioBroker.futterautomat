@@ -379,6 +379,12 @@ log level (Instances → futterautomat.x → log level) to **debug** or **silly*
 	### **WORK IN PROGRESS**
 -->
 
+### 0.1.6 (2026-06-29)
+* (ssbingo) Resolve repository checker W0083: the pinned UI packages (react, react-dom, @mui/*, @types/react(-dom)) are no longer direct dependencies (kept via peerDependencies of adapter-react-v5 + npm overrides)
+* (ssbingo) Replace react-leaflet with plain Leaflet in the location picker (removes the react-leaflet dependency)
+* (ssbingo) Upgrade TypeScript to 6.x; exclude test files from the type-check
+* (ssbingo) Use cron schedules for Dependabot (S8906)
+
 ### 0.1.5 (2026-06-29)
 * (ssbingo) Keep the admin UI stack on React 18 / MUI 6 / react-leaflet 4 (required by adapter-react-v5); revert incompatible major dependency updates and block them in dependabot
 * (ssbingo) Keep TypeScript on 5.x; adopt ioBroker/testing-action-check@v2 in CI

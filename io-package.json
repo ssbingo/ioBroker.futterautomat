@@ -1,20 +1,20 @@
 {
 	"common": {
 		"name": "futterautomat",
-		"version": "0.1.5",
+		"version": "0.1.6",
 		"news": {
-			"0.1.5": {
-				"en": "Keep the admin UI stack on React 18 / MUI 6 (required by adapter-react-v5); revert incompatible major dependency bumps and block them in dependabot.",
-				"de": "Admin-UI-Stack auf React 18 / MUI 6 halten (von adapter-react-v5 verlangt); inkompatible Major-Updates zurückgenommen und in Dependabot gesperrt.",
-				"ru": "Стек интерфейса администратора остаётся на React 18 / MUI 6 (требуется adapter-react-v5); несовместимые мажорные обновления отменены и заблокированы в dependabot.",
-				"pt": "Manter a interface de administração em React 18 / MUI 6 (exigido pelo adapter-react-v5); reverter atualizações maiores incompatíveis e bloqueá-las no dependabot.",
-				"nl": "De beheerinterface op React 18 / MUI 6 houden (vereist door adapter-react-v5); incompatibele major-updates teruggedraaid en geblokkeerd in dependabot.",
-				"fr": "Conserver l'interface d'administration sur React 18 / MUI 6 (requis par adapter-react-v5) ; annuler les montées de version majeures incompatibles et les bloquer dans dependabot.",
-				"it": "Mantieni l'interfaccia di amministrazione su React 18 / MUI 6 (richiesto da adapter-react-v5); annullati gli aggiornamenti major incompatibili e bloccati in dependabot.",
-				"es": "Mantener la interfaz de administración en React 18 / MUI 6 (requerido por adapter-react-v5); revertir actualizaciones mayores incompatibles y bloquearlas en dependabot.",
-				"pl": "Utrzymanie interfejsu administracyjnego na React 18 / MUI 6 (wymagane przez adapter-react-v5); cofnięcie niekompatybilnych aktualizacji major i zablokowanie ich w dependabot.",
-				"uk": "Залишити інтерфейс адміністратора на React 18 / MUI 6 (потрібно adapter-react-v5); скасовано несумісні мажорні оновлення та заблоковано їх у dependabot.",
-				"zh-cn": "管理界面保持在 React 18 / MUI 6（adapter-react-v5 要求）；回退不兼容的大版本升级并在 dependabot 中屏蔽。"
+			"0.1.6": {
+				"en": "Resolve repository checker warnings: drop pinned UI packages as direct dependencies (kept via peers/overrides), replace react-leaflet with plain leaflet, upgrade TypeScript to 6, and use cron schedules for Dependabot.",
+				"de": "Repository-Checker-Warnungen behoben: gepinnte UI-Pakete nicht mehr als direkte Abhängigkeiten (über Peers/Overrides), react-leaflet durch reines leaflet ersetzt, TypeScript auf 6 angehoben und Dependabot auf cron-Zeitpläne umgestellt.",
+				"ru": "Устранены предупреждения repository checker: закреплённые UI-пакеты больше не прямые зависимости (через peers/overrides), react-leaflet заменён на чистый leaflet, TypeScript обновлён до 6, Dependabot переведён на cron-расписания.",
+				"pt": "Resolvidos avisos do repository checker: pacotes de UI fixados deixam de ser dependências diretas (via peers/overrides), react-leaflet substituído por leaflet puro, TypeScript atualizado para 6 e Dependabot a usar agendamentos cron.",
+				"nl": "Repository-checker-waarschuwingen opgelost: vastgezette UI-pakketten niet meer als directe afhankelijkheden (via peers/overrides), react-leaflet vervangen door kaal leaflet, TypeScript naar 6 en Dependabot met cron-schema's.",
+				"fr": "Avertissements du repository checker corrigés : paquets d'UI épinglés retirés des dépendances directes (via peers/overrides), react-leaflet remplacé par leaflet pur, TypeScript passé à 6 et Dependabot en planifications cron.",
+				"it": "Risolti gli avvisi del repository checker: pacchetti UI bloccati non più dipendenze dirette (tramite peers/overrides), react-leaflet sostituito da leaflet puro, TypeScript aggiornato a 6 e Dependabot con pianificazioni cron.",
+				"es": "Resueltas las advertencias del repository checker: paquetes de UI fijados ya no son dependencias directas (vía peers/overrides), react-leaflet sustituido por leaflet puro, TypeScript actualizado a 6 y Dependabot con programaciones cron.",
+				"pl": "Rozwiązano ostrzeżenia repository checkera: przypięte pakiety UI nie są już bezpośrednimi zależnościami (przez peers/overrides), react-leaflet zastąpiony czystym leaflet, TypeScript podniesiony do 6, Dependabot na harmonogramach cron.",
+				"uk": "Усунено попередження repository checker: закріплені UI-пакети більше не прямі залежності (через peers/overrides), react-leaflet замінено на чистий leaflet, TypeScript оновлено до 6, Dependabot на cron-розкладах.",
+				"zh-cn": "解决仓库检查器警告：固定的 UI 包不再作为直接依赖（通过 peers/overrides 保留），用纯 leaflet 替换 react-leaflet，TypeScript 升级到 6，Dependabot 改用 cron 计划。"
 			}
 		},
 		"titleLang": {
