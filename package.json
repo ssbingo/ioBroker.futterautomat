@@ -1,6 +1,6 @@
 {
   "name": "iobroker.futterautomat",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Steuerung für umgebaute Futterautomaten",
   "author": {
     "name": "ssbingo",
@@ -26,7 +26,6 @@
     "@iobroker/adapter-core": "^3.4.1",
     "suncalc": "^2.0.0"
   },
-  "comment-overrides": "react/react-dom are peer deps of @iobroker/adapter-react-v5 (React 18 / MUI 6); pinned here so they are not direct (dev)dependencies (avoids outdated-dependency warnings) while keeping a valid tree.",
   "overrides": {
     "react": "18.3.1",
     "react-dom": "18.3.1"

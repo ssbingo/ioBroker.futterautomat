@@ -379,6 +379,9 @@ log level (Instances → futterautomat.x → log level) to **debug** or **silly*
 	### **WORK IN PROGRESS**
 -->
 
+### 0.1.7 (2026-06-29)
+* (ssbingo) Remove the unsupported custom "comment-overrides" key from package.json (repository checker E0058)
+
 ### 0.1.6 (2026-06-29)
 * (ssbingo) Resolve repository checker W0083: the pinned UI packages (react, react-dom, @mui/*, @types/react(-dom)) are no longer direct dependencies (kept via peerDependencies of adapter-react-v5 + npm overrides)
 * (ssbingo) Replace react-leaflet with plain Leaflet in the location picker (removes the react-leaflet dependency)

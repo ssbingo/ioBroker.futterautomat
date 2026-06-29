@@ -1,20 +1,20 @@
 {
 	"common": {
 		"name": "futterautomat",
-		"version": "0.1.6",
+		"version": "0.1.7",
 		"news": {
-			"0.1.6": {
-				"en": "Resolve repository checker warnings: drop pinned UI packages as direct dependencies (kept via peers/overrides), replace react-leaflet with plain leaflet, upgrade TypeScript to 6, and use cron schedules for Dependabot.",
-				"de": "Repository-Checker-Warnungen behoben: gepinnte UI-Pakete nicht mehr als direkte Abhängigkeiten (über Peers/Overrides), react-leaflet durch reines leaflet ersetzt, TypeScript auf 6 angehoben und Dependabot auf cron-Zeitpläne umgestellt.",
-				"ru": "Устранены предупреждения repository checker: закреплённые UI-пакеты больше не прямые зависимости (через peers/overrides), react-leaflet заменён на чистый leaflet, TypeScript обновлён до 6, Dependabot переведён на cron-расписания.",
-				"pt": "Resolvidos avisos do repository checker: pacotes de UI fixados deixam de ser dependências diretas (via peers/overrides), react-leaflet substituído por leaflet puro, TypeScript atualizado para 6 e Dependabot a usar agendamentos cron.",
-				"nl": "Repository-checker-waarschuwingen opgelost: vastgezette UI-pakketten niet meer als directe afhankelijkheden (via peers/overrides), react-leaflet vervangen door kaal leaflet, TypeScript naar 6 en Dependabot met cron-schema's.",
-				"fr": "Avertissements du repository checker corrigés : paquets d'UI épinglés retirés des dépendances directes (via peers/overrides), react-leaflet remplacé par leaflet pur, TypeScript passé à 6 et Dependabot en planifications cron.",
-				"it": "Risolti gli avvisi del repository checker: pacchetti UI bloccati non più dipendenze dirette (tramite peers/overrides), react-leaflet sostituito da leaflet puro, TypeScript aggiornato a 6 e Dependabot con pianificazioni cron.",
-				"es": "Resueltas las advertencias del repository checker: paquetes de UI fijados ya no son dependencias directas (vía peers/overrides), react-leaflet sustituido por leaflet puro, TypeScript actualizado a 6 y Dependabot con programaciones cron.",
-				"pl": "Rozwiązano ostrzeżenia repository checkera: przypięte pakiety UI nie są już bezpośrednimi zależnościami (przez peers/overrides), react-leaflet zastąpiony czystym leaflet, TypeScript podniesiony do 6, Dependabot na harmonogramach cron.",
-				"uk": "Усунено попередження repository checker: закріплені UI-пакети більше не прямі залежності (через peers/overrides), react-leaflet замінено на чистий leaflet, TypeScript оновлено до 6, Dependabot на cron-розкладах.",
-				"zh-cn": "解决仓库检查器警告：固定的 UI 包不再作为直接依赖（通过 peers/overrides 保留），用纯 leaflet 替换 react-leaflet，TypeScript 升级到 6，Dependabot 改用 cron 计划。"
+			"0.1.7": {
+				"en": "Remove the unsupported custom \"comment-overrides\" key from package.json (repository checker E0058).",
+				"de": "Nicht unterstützten eigenen Schlüssel \"comment-overrides\" aus package.json entfernt (Repository-Checker E0058).",
+				"ru": "Удалён неподдерживаемый пользовательский ключ \"comment-overrides\" из package.json (repository checker E0058).",
+				"pt": "Removida a chave personalizada não suportada \"comment-overrides\" do package.json (repository checker E0058).",
+				"nl": "Niet-ondersteunde eigen sleutel \"comment-overrides\" uit package.json verwijderd (repository checker E0058).",
+				"fr": "Suppression de la clé personnalisée non prise en charge « comment-overrides » de package.json (repository checker E0058).",
+				"it": "Rimossa la chiave personalizzata non supportata \"comment-overrides\" da package.json (repository checker E0058).",
+				"es": "Eliminada la clave personalizada no admitida \"comment-overrides\" de package.json (repository checker E0058).",
+				"pl": "Usunięto nieobsługiwany własny klucz \"comment-overrides\" z package.json (repository checker E0058).",
+				"uk": "Видалено непідтримуваний власний ключ \"comment-overrides\" з package.json (repository checker E0058).",
+				"zh-cn": "从 package.json 移除不受支持的自定义键 \"comment-overrides\"（仓库检查器 E0058）。"
 			}
 		},
 		"titleLang": {
