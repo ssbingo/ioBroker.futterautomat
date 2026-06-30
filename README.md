@@ -245,6 +245,7 @@ state, and report one of three results per feeding:
 
 * **Verify that the switch actually turns on and off** – enables the supervision.
 * **Verification timeout (seconds)** – how long to wait for the confirmation.
+* **Verification attempts** – how many staggered re-checks to perform before reporting a fault (default 3). Each attempt also reads the current state back, so delayed status feedback (e.g. Homematic radio) no longer triggers a false fault.
 
 > **Important:** supervision works only if the switch **reports its real state back**, i.e. the
 > target object is updated with `ack=true` (typical for smart plugs/relays with status feedback).
@@ -382,6 +383,10 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 	### **WORK IN PROGRESS**
 -->
 
+### 0.4.0 (2026-06-30)
+* (ssbingo) More reliable switch supervision for devices with delayed status feedback (e.g. Homematic radio): each verification now actively reads the current acknowledged state back and performs several staggered re-checks before reporting a fault, instead of failing after a single timeout
+* (ssbingo) New per-switch option "Verification attempts" (default 3) to configure the number of staggered re-checks
+
 ### 0.3.0 (2026-06-30)
 * (ssbingo) Localize the feeding result messages (Telegram and the `lastResult` data point) and the block reasons (`blockReason`) into all 11 ioBroker languages; the text now follows the configured system language and defaults to English
 * (ssbingo) Translate the adapter title (`titleLang`) into all 11 languages
@@ -421,10 +426,6 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 * (ssbingo) Require admin >= 7.6.20 (repository checker E1057)
 * (ssbingo) Add the "ioBroker" keyword (repository checker W0040)
 * (ssbingo) Update minor dev dependencies (@emotion/*, @types/leaflet)
-
-### 0.1.1 (2026-06-29)
-* (ssbingo) Raised the minimum Node.js version to >= 22 (Node 20 is no longer used)
-* (ssbingo) Enabled npm releases via trusted publishing (OIDC) in the GitHub Actions workflow
 
 ---
 

@@ -234,6 +234,7 @@ Na het schakelen kan de adapter controleren of de schakelaar de in- en uit-toest
 
 * **Controleren of de schakelaar daadwerkelijk in- en uitschakelt** – activeert de bewaking.
 * **Bewakings-timeout (seconden)** – hoe lang op de bevestiging wordt gewacht.
+* **Verificatiepogingen** – hoeveel gespreide hercontroles worden uitgevoerd voordat een storing wordt gemeld (standaard 3). Elke poging leest ook de huidige toestand terug, zodat vertraagde terugmelding (bijv. Homematic-radio) geen valse storing meer veroorzaakt.
 
 > **Belangrijk:** De bewaking werkt alleen wanneer de schakelaar zijn **werkelijke toestand
 > terugmeldt**, d.w.z. het doelobject wordt met `ack=true` bijgewerkt (typisch voor

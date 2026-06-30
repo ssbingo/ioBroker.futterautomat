@@ -57,6 +57,8 @@
 	"Verify that the switch actually turns on and off": "Verifica che l'interruttore si accenda e si spenga effettivamente",
 	"Only works if the switch reports its real state back (acknowledged / ack=true).": "Funziona solo se l'interruttore restituisce il suo stato reale (confermato / ack=true).",
 	"Verification timeout (seconds)": "Timeout di verifica (secondi)",
+	"Verification attempts": "Tentativi di verifica",
+	"Staggered re-checks before a fault is reported - useful for devices with delayed radio feedback (e.g. Homematic).": "Controlli ripetuti e scaglionati prima di segnalare un guasto — utile per dispositivi con feedback radio ritardato (ad es. Homematic).",
 	"Manual feeding": "Alimentazione manuale",
 	"Manual feeding duration (seconds)": "Durata dell'alimentazione manuale (secondi)",
 	"Feed now": "Alimenta ora",

@@ -57,6 +57,8 @@
 	"Verify that the switch actually turns on and off": "Verify that the switch actually turns on and off",
 	"Only works if the switch reports its real state back (acknowledged / ack=true).": "Only works if the switch reports its real state back (acknowledged / ack=true).",
 	"Verification timeout (seconds)": "Verification timeout (seconds)",
+	"Verification attempts": "Verification attempts",
+	"Staggered re-checks before a fault is reported - useful for devices with delayed radio feedback (e.g. Homematic).": "Staggered re-checks before a fault is reported - useful for devices with delayed radio feedback (e.g. Homematic).",
 	"Manual feeding": "Manual feeding",
 	"Manual feeding duration (seconds)": "Manual feeding duration (seconds)",
 	"Feed now": "Feed now",

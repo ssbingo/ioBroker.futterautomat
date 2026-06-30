@@ -1,6 +1,6 @@
 {
   "name": "iobroker.automatic-feeder",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Scheduled automatic feeder for ioBroker: switches an existing state for a set duration, with temperature and day/night limits.",
   "author": {
     "name": "ssbingo",

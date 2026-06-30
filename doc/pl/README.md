@@ -237,6 +237,7 @@ włączenia i wyłączenia, i zgłasza dla każdego karmienia jeden z trzech wyn
 
 * **Sprawdzaj, czy przełącznik rzeczywiście włącza i wyłącza** – aktywuje monitorowanie.
 * **Limit czasu monitorowania (sekundy)** – jak długo czekać na potwierdzenie.
+* **Próby weryfikacji** – ile rozłożonych w czasie ponownych sprawdzeń wykonywanych jest przed zgłoszeniem awarii (domyślnie 3). Każda próba dodatkowo odczytuje bieżący stan, więc opóźniona informacja zwrotna (np. radio Homematic) nie powoduje już fałszywej awarii.
 
 > **Ważne:** Monitorowanie działa tylko wtedy, gdy przełącznik **zgłasza zwrotnie swój
 > rzeczywisty stan**, tzn. obiekt docelowy jest aktualizowany z `ack=true` (typowe dla

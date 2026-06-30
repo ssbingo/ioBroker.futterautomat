@@ -729,29 +729,96 @@ class AutomaticFeeder extends utils.Adapter {
 	}
 
 	/**
-	 * Waits until the controlled switch reaches the expected (acknowledged) value
-	 * within the configured timeout. Requires the target to report its state with
-	 * ack=true, otherwise it cannot be distinguished from our own command.
+	 * Confirms that the controlled switch reached the expected (acknowledged) value.
+	 *
+	 * Robust against delayed status feedback (e.g. Homematic radio round-trips):
+	 * each attempt first reads back the current acknowledged value and, if it does
+	 * not match yet, waits up to `verifyTimeoutSec` for a fresh acknowledged change.
+	 * This is repeated `verifyRetries` times (staggered re-checks) before a fault is
+	 * reported, with a final read-back afterwards. Only ack=true values count, so
+	 * our own command cannot confirm itself.
 	 *
 	 * @param {ioBroker.AutomaticFeederSwitchConfig} sw - switch configuration
 	 * @param {boolean} expectOn - true = wait for the on value, false = off value
-	 * @returns {Promise<boolean>} true if confirmed, false on timeout
+	 * @returns {Promise<boolean>} true if confirmed, false after all attempts time out
 	 */
-	verifyState(sw, expectOn) {
+	async verifyState(sw, expectOn) {
 		const expected = coerce(expectOn ? (sw.onValue ?? true) : (sw.offValue ?? false));
 		const timeoutMs = Math.max(1, Number(sw.verifyTimeoutSec) || 5) * 1000;
+		const attempts = Math.max(1, Number(sw.verifyRetries) || 3);
+		const label = expectOn ? 'ON' : 'OFF';
+		this.log.silly(
+			`Verification armed for ${this.swLabel(sw)} expecting ${label}=${JSON.stringify(expected)} (${attempts} attempt(s) x ${timeoutMs}ms).`,
+		);
+
+		for (let attempt = 1; attempt <= attempts; attempt++) {
+			// fast path: a status echo may already have arrived (or been missed as
+			// an event) - accept the current acknowledged value if it matches
+			if (await this.readConfirmed(sw.objectId, expected)) {
+				this.log.debug(
+					`Verification CONFIRMED for ${this.swLabel(sw)} expecting ${label} via state read (attempt ${attempt}/${attempts}).`,
+				);
+				return true;
+			}
+			// otherwise wait for a fresh acknowledged change within this window
+			const confirmed = await this.waitForAck(sw, expected, timeoutMs);
+			if (this.terminating) {
+				return false;
+			}
+			if (confirmed) {
+				this.log.debug(
+					`Verification CONFIRMED for ${this.swLabel(sw)} expecting ${label} via ack event (attempt ${attempt}/${attempts}).`,
+				);
+				return true;
+			}
+			this.log.debug(
+				`Verification attempt ${attempt}/${attempts} for ${this.swLabel(sw)} expecting ${label} timed out after ${timeoutMs}ms.`,
+			);
+		}
+		// final read-back: the acknowledgement may have arrived right at the end
+		if (await this.readConfirmed(sw.objectId, expected)) {
+			this.log.debug(`Verification CONFIRMED for ${this.swLabel(sw)} expecting ${label} via final state read.`);
+			return true;
+		}
+		this.log.debug(`Verification FAILED for ${this.swLabel(sw)} expecting ${label} after ${attempts} attempt(s).`);
+		return false;
+	}
+
+	/**
+	 * Reads the current value of a foreign state and checks whether it is an
+	 * acknowledged (ack=true) value matching `expected`. Used as the active
+	 * read-back that complements the event-based watcher.
+	 *
+	 * @param {string} objectId - the controlled foreign state id
+	 * @param {boolean | number | string} expected - the configured target value
+	 * @returns {Promise<boolean>} true if the confirmed current value matches
+	 */
+	async readConfirmed(objectId, expected) {
+		try {
+			const st = await this.getForeignStateAsync(objectId);
+			return !!st && st.ack === true && this.valuesMatch(st.val, expected);
+		} catch (e) {
+			this.log.warn(`Could not read ${objectId} for verification: ${e.message}`);
+			return false;
+		}
+	}
+
+	/**
+	 * Waits up to `timeoutMs` for an acknowledged change of the switch's state to
+	 * the expected value (resolved by onStateChange via the watcher map).
+	 *
+	 * @param {ioBroker.AutomaticFeederSwitchConfig} sw - switch configuration
+	 * @param {boolean | number | string} expected - the configured target value
+	 * @param {number} timeoutMs - how long to wait in milliseconds
+	 * @returns {Promise<boolean>} true if confirmed within the window, false on timeout
+	 */
+	waitForAck(sw, expected, timeoutMs) {
 		return new Promise(resolve => {
 			const timer = this.setTimeout(() => {
 				this.verifyWatchers.delete(sw.objectId);
-				this.log.debug(
-					`Verification TIMEOUT for ${this.swLabel(sw)} expecting ${expectOn ? 'ON' : 'OFF'}=${JSON.stringify(expected)} after ${timeoutMs}ms.`,
-				);
 				resolve(false);
 			}, timeoutMs);
 			this.verifyWatchers.set(sw.objectId, { expected, resolve, timer });
-			this.log.silly(
-				`Verification armed for ${this.swLabel(sw)} expecting ${expectOn ? 'ON' : 'OFF'}=${JSON.stringify(expected)} (timeout ${timeoutMs}ms).`,
-			);
 		});
 	}
 
@@ -1038,6 +1105,7 @@ class AutomaticFeeder extends utils.Adapter {
 
 			for (const w of this.verifyWatchers.values()) {
 				this.clearTimeout(w.timer);
+				w.resolve(false);
 			}
 			this.verifyWatchers.clear();
 

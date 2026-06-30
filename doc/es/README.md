@@ -250,6 +250,7 @@ estado de encendido y apagado, y notifica por cada alimentación uno de tres res
 
 * **Comprobar si el interruptor realmente se enciende y apaga**: activa la supervisión.
 * **Tiempo de espera de la supervisión (segundos)**: cuánto tiempo se espera la confirmación.
+* **Intentos de verificación**: cuántas recomprobaciones escalonadas se realizan antes de informar de una avería (3 por defecto). Cada intento también vuelve a leer el estado actual, de modo que una respuesta retardada (p. ej., radio Homematic) ya no provoca una avería falsa.
 
 > **Importante:** la supervisión solo funciona si el interruptor **informa de su estado real**, es
 > decir, si el objeto de destino se actualiza con `ack=true` (típico de enchufes/relés con

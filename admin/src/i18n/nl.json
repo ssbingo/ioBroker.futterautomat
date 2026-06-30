@@ -57,6 +57,8 @@
 	"Verify that the switch actually turns on and off": "Controleer of de schakelaar daadwerkelijk aan- en uitgaat",
 	"Only works if the switch reports its real state back (acknowledged / ack=true).": "Werkt alleen als de schakelaar zijn werkelijke status terugmeldt (bevestigd / ack=true).",
 	"Verification timeout (seconds)": "Verificatie-time-out (seconden)",
+	"Verification attempts": "Verificatiepogingen",
+	"Staggered re-checks before a fault is reported - useful for devices with delayed radio feedback (e.g. Homematic).": "Meerdere gespreide hercontroles voordat een storing wordt gemeld — handig voor apparaten met vertraagde radiofeedback (bijv. Homematic).",
 	"Manual feeding": "Handmatig voeden",
 	"Manual feeding duration (seconds)": "Duur handmatig voeden (seconden)",
 	"Feed now": "Nu voeden",

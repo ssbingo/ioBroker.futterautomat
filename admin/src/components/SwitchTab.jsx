@@ -328,14 +328,29 @@ function SwitchTab(props) {
 				<Typography variant="caption" color="textSecondary" sx={{ display: 'block', mb: 1 }}>
 					{I18n.t('Only works if the switch reports its real state back (acknowledged / ack=true).')}
 				</Typography>
-				<TextField
-					variant="standard"
-					type="number"
-					label={I18n.t('Verification timeout (seconds)')}
-					disabled={sw.verifyEnabled === false}
-					value={sw.verifyTimeoutSec ?? 5}
-					onChange={(e) => onChange({ verifyTimeoutSec: Number(e.target.value) || 0 })}
-				/>
+				<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+					<TextField
+						variant="standard"
+						type="number"
+						label={I18n.t('Verification timeout (seconds)')}
+						disabled={sw.verifyEnabled === false}
+						value={sw.verifyTimeoutSec ?? 5}
+						onChange={(e) => onChange({ verifyTimeoutSec: Number(e.target.value) || 0 })}
+					/>
+					<TextField
+						variant="standard"
+						type="number"
+						label={I18n.t('Verification attempts')}
+						disabled={sw.verifyEnabled === false}
+						value={sw.verifyRetries ?? 3}
+						onChange={(e) => onChange({ verifyRetries: Math.max(1, Number(e.target.value) || 1) })}
+					/>
+				</Box>
+				<Typography variant="caption" color="textSecondary" sx={{ display: 'block', mt: 1 }}>
+					{I18n.t(
+						'Staggered re-checks before a fault is reported - useful for devices with delayed radio feedback (e.g. Homematic).',
+					)}
+				</Typography>
 			</Section>
 
 			{/* Telegram notifications */}

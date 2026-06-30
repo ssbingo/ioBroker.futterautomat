@@ -255,6 +255,7 @@ activé puis désactivé, et signale pour chaque distribution l'un des trois ré
 
 * **Vérifier que l'interrupteur s'active et se désactive réellement** — active la surveillance.
 * **Délai d'attente de la surveillance (secondes)** — combien de temps attendre la confirmation.
+* **Tentatives de vérification** — combien de revérifications échelonnées sont effectuées avant de signaler un défaut (3 par défaut). Chaque tentative relit aussi l'état actuel, de sorte qu'un retour différé (par ex. radio Homematic) ne déclenche plus de faux défaut.
 
 > **Important :** la surveillance ne fonctionne que si l'interrupteur **renvoie son état réel**,
 > c.-à-d. que l'objet cible est mis à jour avec `ack=true` (typique des prises/relais avec retour

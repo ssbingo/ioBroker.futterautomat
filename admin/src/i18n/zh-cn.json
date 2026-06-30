@@ -57,6 +57,8 @@
 	"Verify that the switch actually turns on and off": "验证开关是否确实开启和关闭",
 	"Only works if the switch reports its real state back (acknowledged / ack=true).": "仅当开关回报其真实状态时有效（已确认 / ack=true）。",
 	"Verification timeout (seconds)": "验证超时（秒）",
+	"Verification attempts": "验证次数",
+	"Staggered re-checks before a fault is reported - useful for devices with delayed radio feedback (e.g. Homematic).": "在报告故障前进行多次错时复查——适用于无线反馈延迟的设备（例如 Homematic）。",
 	"Manual feeding": "手动喂食",
 	"Manual feeding duration (seconds)": "手动喂食时长（秒）",
 	"Feed now": "立即喂食",

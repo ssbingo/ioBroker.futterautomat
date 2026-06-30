@@ -250,6 +250,7 @@ risultati:
 
 * **Verifica che l'interruttore si accenda e spenga effettivamente** – attiva il monitoraggio.
 * **Timeout di monitoraggio (secondi)** – per quanto tempo si attende la conferma.
+* **Tentativi di verifica** – quanti controlli scaglionati vengono eseguiti prima di segnalare un guasto (predefinito 3). Ogni tentativo rilegge anche lo stato attuale, così il feedback ritardato (ad es. radio Homematic) non genera più un falso guasto.
 
 > **Importante:** il monitoraggio funziona solo se l'interruttore **restituisce il proprio stato
 > reale**, cioè l'oggetto di destinazione viene aggiornato con `ack=true` (tipico per

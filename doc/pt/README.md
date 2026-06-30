@@ -234,6 +234,7 @@ de ligado e desligado, e reporta por alimentação um de três resultados:
 
 * **Verificar se o interruptor realmente liga e desliga** – ativa o monitoramento.
 * **Timeout do monitoramento (segundos)** – por quanto tempo se aguarda a confirmação.
+* **Tentativas de verificação** – quantas reverificações escalonadas são feitas antes de relatar uma falha (padrão 3). Cada tentativa também lê o estado atual de volta, de modo que o retorno atrasado (por exemplo, rádio Homematic) não gera mais uma falha falsa.
 
 > **Importante:** O monitoramento só funciona se o interruptor **reportar o seu estado real**,
 > ou seja, o objeto de destino é atualizado com `ack=true` (típico de

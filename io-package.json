@@ -1,20 +1,20 @@
 {
 	"common": {
 		"name": "automatic-feeder",
-		"version": "0.3.0",
+		"version": "0.4.0",
 		"news": {
-			"0.3.0": {
-				"en": "Notification messages (Telegram, lastResult) and block reasons are now localized into all 11 languages; the text follows the system language and defaults to English. Translated the adapter title (titleLang).",
-				"de": "Benachrichtigungen (Telegram, lastResult) und Sperrgründe werden jetzt in alle 11 Sprachen lokalisiert; der Text folgt der Systemsprache, Standard Englisch. Adaptertitel (titleLang) übersetzt.",
-				"ru": "Уведомления (Telegram, lastResult) и причины блокировки теперь локализованы на все 11 языков; текст следует системному языку, по умолчанию английский. Переведён заголовок адаптера (titleLang).",
-				"pt": "As mensagens de notificação (Telegram, lastResult) e os motivos de bloqueio agora são localizados em todos os 11 idiomas; o texto segue o idioma do sistema, padrão inglês. Título do adaptador (titleLang) traduzido.",
-				"nl": "Meldingen (Telegram, lastResult) en blokkeerredenen worden nu in alle 11 talen gelokaliseerd; de tekst volgt de systeemtaal, standaard Engels. Adaptertitel (titleLang) vertaald.",
-				"fr": "Les messages de notification (Telegram, lastResult) et les raisons de blocage sont désormais traduits dans les 11 langues ; le texte suit la langue système, anglais par défaut. Titre de l'adaptateur (titleLang) traduit.",
-				"it": "I messaggi di notifica (Telegram, lastResult) e i motivi di blocco sono ora localizzati in tutte le 11 lingue; il testo segue la lingua di sistema, inglese predefinito. Titolo dell'adattatore (titleLang) tradotto.",
-				"es": "Los mensajes de notificación (Telegram, lastResult) y los motivos de bloqueo ahora están localizados en los 11 idiomas; el texto sigue el idioma del sistema, inglés por defecto. Título del adaptador (titleLang) traducido.",
-				"pl": "Powiadomienia (Telegram, lastResult) i powody blokady są teraz tłumaczone na wszystkie 11 języków; tekst zależy od języka systemu, domyślnie angielski. Przetłumaczono tytuł adaptera (titleLang).",
-				"uk": "Сповіщення (Telegram, lastResult) та причини блокування тепер локалізовані всіма 11 мовами; текст залежить від системної мови, за замовчуванням англійська. Перекладено заголовок адаптера (titleLang).",
-				"zh-cn": "通知消息（Telegram、lastResult）和阻止原因现在已本地化为全部 11 种语言；文本跟随系统语言，默认英语。已翻译适配器标题（titleLang）。"
+			"0.4.0": {
+				"en": "More reliable switch supervision: verification now actively reads the current state back and retries in staggered attempts (new per-switch option 'Verification attempts', default 3) before reporting a fault. Fixes false faults with delayed status feedback such as Homematic radio.",
+				"de": "Zuverlässigere Schaltüberwachung: Die Verifikation fragt jetzt den Ist-Wert aktiv ab und prüft in mehreren zeitversetzten Versuchen nach (neues Feld 'Überwachungs-Versuche', Standard 3), bevor eine Störung gemeldet wird. Behebt Fehlmeldungen bei verzögerter Rückmeldung wie Homematic-Funk.",
+				"ru": "Более надёжный контроль переключателя: проверка теперь активно считывает текущее значение и повторяется несколькими попытками с интервалами (новый параметр 'Попытки проверки', по умолчанию 3) перед сообщением о неисправности. Исправляет ложные ошибки при задержке обратной связи, например радио Homematic.",
+				"pt": "Monitoramento de comutação mais confiável: a verificação agora lê o estado atual de volta e tenta novamente em várias tentativas escalonadas (nova opção 'Tentativas de verificação', padrão 3) antes de relatar uma falha. Corrige falhas falsas com retorno atrasado, como rádio Homematic.",
+				"nl": "Betrouwbaardere schakelbewaking: de verificatie leest nu de huidige toestand terug en probeert het in meerdere gespreide pogingen opnieuw (nieuwe optie 'Verificatiepogingen', standaard 3) voordat een storing wordt gemeld. Lost valse storingen op bij vertraagde terugmelding zoals Homematic-radio.",
+				"fr": "Surveillance de commutation plus fiable : la vérification relit désormais l'état actuel et réessaie en plusieurs tentatives échelonnées (nouvelle option 'Tentatives de vérification', 3 par défaut) avant de signaler un défaut. Corrige les faux défauts en cas de retour différé comme la radio Homematic.",
+				"it": "Monitoraggio della commutazione più affidabile: la verifica ora rilegge lo stato attuale e riprova con più tentativi scaglionati (nuova opzione 'Tentativi di verifica', predefinito 3) prima di segnalare un guasto. Corregge i falsi guasti con feedback ritardato come la radio Homematic.",
+				"es": "Supervisión de conmutación más fiable: la verificación ahora vuelve a leer el estado actual y reintenta en varios intentos escalonados (nueva opción 'Intentos de verificación', 3 por defecto) antes de informar de una avería. Corrige averías falsas con respuesta retardada como la radio Homematic.",
+				"pl": "Bardziej niezawodne monitorowanie przełącznika: weryfikacja odczytuje teraz bieżący stan i ponawia próbę w kilku rozłożonych w czasie próbach (nowa opcja 'Próby weryfikacji', domyślnie 3) przed zgłoszeniem awarii. Naprawia fałszywe awarie przy opóźnionej informacji zwrotnej, np. radio Homematic.",
+				"uk": "Надійніший контроль перемикача: перевірка тепер активно зчитує поточний стан і повторює кілька рознесених у часі спроб (нова опція 'Спроби перевірки', за замовчуванням 3) перед повідомленням про несправність. Виправляє хибні помилки за затримки зворотного зв’язку, як-от радіо Homematic.",
+				"zh-cn": "更可靠的开关监控：验证现在会主动回读当前状态，并在报告故障前进行多次错时复查（新增'验证次数'选项，默认 3）。修复了 Homematic 无线电等延迟反馈导致的误报。"
 			}
 		},
 		"titleLang": {

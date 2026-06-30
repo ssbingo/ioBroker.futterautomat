@@ -42,8 +42,10 @@ declare global {
 			manualIgnoresBlocks: boolean;
 			/** Verify (read back) that this switch actually turned on and off. */
 			verifyEnabled: boolean;
-			/** Timeout in seconds to wait for the acknowledged on/off confirmation. */
+			/** Timeout in seconds to wait for the acknowledged on/off confirmation (per attempt). */
 			verifyTimeoutSec: number;
+			/** Number of staggered re-checks before a switching fault is reported (default 3). */
+			verifyRetries: number;
 			/** Telegram instance id used for this switch, e.g. "telegram.0" (empty = off). */
 			telegramInstance: string;
 			/** Optional Telegram recipient (user/chat name) for this switch; empty = all. */

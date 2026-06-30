@@ -234,6 +234,7 @@ Nach dem Schalten kann der Adapter prüfen, ob der Schalter den Ein- und Aus-Zus
 
 * **Prüfen, ob der Schalter tatsächlich ein- und ausschaltet** – aktiviert die Überwachung.
 * **Überwachungs-Timeout (Sekunden)** – wie lange auf die Bestätigung gewartet wird.
+* **Überwachungs-Versuche** – wie viele zeitversetzte Nachprüfungen vor einer Störungsmeldung erfolgen (Standard 3). Jeder Versuch fragt zusätzlich den Ist-Wert aktiv ab, sodass verzögerte Rückmeldungen (z. B. Homematic-Funk) keine Fehlmeldung mehr auslösen.
 
 > **Wichtig:** Die Überwachung funktioniert nur, wenn der Schalter seinen **Ist-Zustand
 > zurückmeldet**, d. h. das Zielobjekt wird mit `ack=true` aktualisiert (typisch für
