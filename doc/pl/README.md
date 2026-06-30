@@ -228,9 +228,12 @@ włączenia i wyłączenia, i zgłasza dla każdego karmienia jeden z trzech wyn
 
 | Wynik | Znaczenie | Komunikat |
 |----------|-----------|---------|
-| ✅ Sukces | przełącznik włączył i wyłączył się zgodnie z oczekiwaniem | „Fütterung wurde für x s ausgelöst." |
-| ❌ Włączenie nie powiodło się | przełącznik nigdy nie potwierdził stanu WŁ | „Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ Wyłączenie nie powiodło się | włączył się, ale nie wyłączył ponownie | „Störung Abschaltung Futterautomat!" |
+| ✅ Sukces | przełącznik włączył i wyłączył się zgodnie z oczekiwaniem | „Karmienie uruchomione na x s." |
+| ❌ Włączenie nie powiodło się | przełącznik nigdy nie potwierdził stanu WŁ | „Nie udało się przeprowadzić karmienia. Sprawdź przełącznik!" |
+| ❌ Wyłączenie nie powiodło się | włączył się, ale nie wyłączył ponownie | „Awaria: automat do karmienia nie wyłączył się!" |
+
+> Wiadomość jest wysyłana w ustawionym języku systemowym ioBroker (domyślnie angielski).
+
 
 * **Sprawdzaj, czy przełącznik rzeczywiście włącza i wyłącza** – aktywuje monitorowanie.
 * **Limit czasu monitorowania (sekundy)** – jak długo czekać na potwierdzenie.

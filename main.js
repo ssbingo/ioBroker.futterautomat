@@ -16,6 +16,7 @@
 
 const utils = require('@iobroker/adapter-core');
 const SunCalc = require('suncalc');
+const { translate, SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } = require('./lib/messages');
 
 const MAX_SWITCHES = 5;
 
@@ -50,6 +51,10 @@ class AutomaticFeeder extends utils.Adapter {
 
 		this.switches = [];
 
+		// message language for user-facing texts (lastResult + Telegram);
+		// resolved from the ioBroker system language in onReady, English fallback
+		this.lang = DEFAULT_LANGUAGE;
+
 		this.on('ready', this.onReady.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
 		this.on('message', this.onMessage.bind(this));
@@ -67,12 +72,43 @@ class AutomaticFeeder extends utils.Adapter {
 	}
 
 	/**
+	 * Reads the ioBroker system language and stores it for user-facing messages.
+	 * Falls back to English when the language is unset or not supported.
+	 */
+	async resolveLanguage() {
+		try {
+			const sys = await this.getForeignObjectAsync('system.config');
+			const lang = sys?.common?.language;
+			this.lang = lang && SUPPORTED_LANGUAGES.includes(lang) ? lang : DEFAULT_LANGUAGE;
+		} catch (e) {
+			this.lang = DEFAULT_LANGUAGE;
+			this.log.debug(`Could not read system language, using "${DEFAULT_LANGUAGE}": ${e.message}`);
+		}
+		this.log.debug(`Notification language: ${this.lang}`);
+	}
+
+	/**
+	 * Localizes a user-facing message (lastResult / Telegram) into the configured
+	 * system language, substituting any `{placeholder}` tokens.
+	 *
+	 * @param {string} key - message key from lib/messages
+	 * @param {Record<string, string | number>} [params] - placeholder values
+	 * @returns {string} the localized message
+	 */
+	t(key, params) {
+		return translate(key, this.lang, params);
+	}
+
+	/**
 	 * Is called when databases are connected and adapter received configuration.
 	 */
 	async onReady() {
 		this.log.info('Adapter is starting up...');
 		try {
 			await this.setStateAsync('info.connection', { val: false, ack: true });
+
+			// --- resolve message language from the ioBroker system settings ---
+			await this.resolveLanguage();
 
 			// --- read & sanitize switch configuration ---
 			const rawSwitches = Array.isArray(this.config.switches) ? this.config.switches : [];
@@ -607,10 +643,12 @@ class AutomaticFeeder extends utils.Adapter {
 		this.log.debug(`Evaluating feeding for ${this.swLabel(sw)} (ignoreBlocks=${ignoreBlocks}).`);
 		const reason = ignoreBlocks ? null : this.getBlockReason(sw);
 		const blocked = !!reason;
+		const reasonText = reason ? this.t(reason.key, reason.params) : '';
 		await this.setStateAsync(`switches.${sw.id}.blocked`, { val: blocked, ack: true });
-		await this.setStateAsync(`switches.${sw.id}.blockReason`, { val: reason || '', ack: true });
-		if (blocked) {
-			this.log.info(`Feeding of ${this.swLabel(sw)} blocked: ${reason}`);
+		await this.setStateAsync(`switches.${sw.id}.blockReason`, { val: reasonText, ack: true });
+		if (reason) {
+			// log in English for consistent, language-independent logs
+			this.log.info(`Feeding of ${this.swLabel(sw)} blocked: ${translate(reason.key, 'en', reason.params)}`);
 			return;
 		}
 
@@ -641,7 +679,7 @@ class AutomaticFeeder extends utils.Adapter {
 					this.log.error(
 						`Feeding of ${this.swLabel(sw)} could not be performed - switch did not confirm ON. Check the switch!`,
 					);
-					const failMsg = 'Fütterung konnte nicht durchgeführt werden. Schalter prüfen!';
+					const failMsg = this.t('feedOnFail');
 					await this.reportResult(sw, true, failMsg);
 					this.notify(sw, 'onFail', failMsg);
 					return;
@@ -672,7 +710,7 @@ class AutomaticFeeder extends utils.Adapter {
 					this.log.error(
 						`Fault: ${this.swLabel(sw)} did not switch OFF as planned (still ON?). Check the switch!`,
 					);
-					const offFailMsg = 'Störung Abschaltung Futterautomat!';
+					const offFailMsg = this.t('feedOffFail');
 					await this.reportResult(sw, true, offFailMsg);
 					this.notify(sw, 'offFail', offFailMsg);
 					return;
@@ -681,7 +719,7 @@ class AutomaticFeeder extends utils.Adapter {
 			}
 
 			// --- Scenario 1: everything worked ---
-			const okMsg = `Fütterung wurde für ${seconds}s ausgelöst.`;
+			const okMsg = this.t('feedSuccess', { seconds });
 			await this.reportResult(sw, false, okMsg);
 			this.notify(sw, 'success', okMsg);
 			this.log.info(`${this.swLabel(sw)}: ${okMsg}`);
@@ -791,10 +829,12 @@ class AutomaticFeeder extends utils.Adapter {
 	}
 
 	/**
-	 * Returns a human readable block reason or null if feeding is allowed.
+	 * Returns the reason why feeding is blocked, or null if feeding is allowed.
+	 * The reason is a message key + params so the caller can render it both
+	 * localized (status datapoint) and in English (log).
 	 *
 	 * @param {ioBroker.AutomaticFeederSwitchConfig} sw - switch configuration
-	 * @returns {string | null} block reason or null if feeding is allowed
+	 * @returns {{ key: string, params?: Record<string, string | number> } | null} block reason or null
 	 */
 	getBlockReason(sw) {
 		// night / sun window
@@ -804,7 +844,7 @@ class AutomaticFeeder extends utils.Adapter {
 				`Block check ${this.swLabel(sw)}: now=${new Date(now).toISOString()} window=${this.window.start.toISOString()}..${this.window.end.toISOString()}`,
 			);
 			if (now < this.window.start.getTime() || now > this.window.end.getTime()) {
-				return 'outside sun window (night)';
+				return { key: 'blockNight' };
 			}
 		} else if (sw.respectNight !== false) {
 			this.log.silly(`Block check ${this.swLabel(sw)}: night protection requested but no sun window available.`);
@@ -816,10 +856,10 @@ class AutomaticFeeder extends utils.Adapter {
 			);
 			if (this.waterTemp !== null) {
 				if (sw.waterMin !== null && sw.waterMin !== undefined && this.waterTemp < sw.waterMin) {
-					return `water temperature ${this.waterTemp}°C below ${sw.waterMin}°C`;
+					return { key: 'blockWaterBelow', params: { temp: this.waterTemp, limit: sw.waterMin } };
 				}
 				if (sw.waterMax !== null && sw.waterMax !== undefined && this.waterTemp > sw.waterMax) {
-					return `water temperature ${this.waterTemp}°C above ${sw.waterMax}°C`;
+					return { key: 'blockWaterAbove', params: { temp: this.waterTemp, limit: sw.waterMax } };
 				}
 			}
 		}
@@ -830,10 +870,10 @@ class AutomaticFeeder extends utils.Adapter {
 			);
 			if (this.airTemp !== null) {
 				if (sw.airMin !== null && sw.airMin !== undefined && this.airTemp < sw.airMin) {
-					return `air temperature ${this.airTemp}°C below ${sw.airMin}°C`;
+					return { key: 'blockAirBelow', params: { temp: this.airTemp, limit: sw.airMin } };
 				}
 				if (sw.airMax !== null && sw.airMax !== undefined && this.airTemp > sw.airMax) {
-					return `air temperature ${this.airTemp}°C above ${sw.airMax}°C`;
+					return { key: 'blockAirAbove', params: { temp: this.airTemp, limit: sw.airMax } };
 				}
 			}
 		}

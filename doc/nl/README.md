@@ -225,9 +225,12 @@ Na het schakelen kan de adapter controleren of de schakelaar de in- en uit-toest
 
 | Resultaat | Betekenis | Melding |
 |----------|-----------|---------|
-| ✅ Succes | Schakelaar heeft zoals verwacht in- en uitgeschakeld | „Fütterung wurde für x s ausgelöst." |
-| ❌ Inschakelen mislukt | de schakelaar heeft de AAN-toestand nooit bevestigd | „Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ Uitschakelen mislukt | hij ging aan, maar schakelde niet weer uit | „Störung Abschaltung Futterautomat!" |
+| ✅ Succes | Schakelaar heeft zoals verwacht in- en uitgeschakeld | „Voeding geactiveerd voor x s." |
+| ❌ Inschakelen mislukt | de schakelaar heeft de AAN-toestand nooit bevestigd | „Voeding kon niet worden uitgevoerd. Controleer de schakelaar!" |
+| ❌ Uitschakelen mislukt | hij ging aan, maar schakelde niet weer uit | „Storing: de voederautomaat is niet uitgeschakeld!" |
+
+> Het bericht wordt verzonden in de ingestelde ioBroker-systeemtaal (standaard Engels).
+
 
 * **Controleren of de schakelaar daadwerkelijk in- en uitschakelt** – activeert de bewaking.
 * **Bewakings-timeout (seconden)** – hoe lang op de bevestiging wordt gewacht.

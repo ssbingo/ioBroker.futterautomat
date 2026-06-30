@@ -225,9 +225,12 @@ Nach dem Schalten kann der Adapter prüfen, ob der Schalter den Ein- und Aus-Zus
 
 | Ergebnis | Bedeutung | Meldung |
 |----------|-----------|---------|
-| ✅ Erfolg | Schalter hat wie erwartet ein- und ausgeschaltet | „Fütterung wurde für x s ausgelöst." |
+| ✅ Erfolg | Schalter hat wie erwartet ein- und ausgeschaltet | „Fütterung für x s ausgelöst." |
 | ❌ Einschalten fehlgeschlagen | der Schalter hat den EIN-Zustand nie bestätigt | „Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ Ausschalten fehlgeschlagen | er ging an, schaltete aber nicht wieder aus | „Störung Abschaltung Futterautomat!" |
+| ❌ Ausschalten fehlgeschlagen | er ging an, schaltete aber nicht wieder aus | „Störung: Futterautomat hat nicht abgeschaltet!" |
+
+> Die Meldung wird in der eingestellten ioBroker-Systemsprache gesendet (standardmäßig Englisch).
+
 
 * **Prüfen, ob der Schalter tatsächlich ein- und ausschaltet** – aktiviert die Überwachung.
 * **Überwachungs-Timeout (Sekunden)** – wie lange auf die Bestätigung gewartet wird.

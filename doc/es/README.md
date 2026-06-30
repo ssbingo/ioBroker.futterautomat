@@ -241,9 +241,12 @@ estado de encendido y apagado, y notifica por cada alimentación uno de tres res
 
 | Resultado | Significado | Mensaje |
 |----------|-----------|---------|
-| ✅ Éxito | El interruptor se encendió y apagó como se esperaba | „Fütterung wurde für x s ausgelöst." |
-| ❌ Encendido fallido | El interruptor nunca confirmó el estado de ENCENDIDO | „Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ Apagado fallido | Se encendió, pero no volvió a apagarse | „Störung Abschaltung Futterautomat!" |
+| ✅ Éxito | El interruptor se encendió y apagó como se esperaba | „Alimentación activada durante x s." |
+| ❌ Encendido fallido | El interruptor nunca confirmó el estado de ENCENDIDO | „No se pudo realizar la alimentación. ¡Compruebe el interruptor!" |
+| ❌ Apagado fallido | Se encendió, pero no volvió a apagarse | „Avería: ¡el comedero no se apagó!" |
+
+> El mensaje se envía en el idioma del sistema de ioBroker configurado (inglés de forma predeterminada).
+
 
 * **Comprobar si el interruptor realmente se enciende y apaga**: activa la supervisión.
 * **Tiempo de espera de la supervisión (segundos)**: cuánto tiempo se espera la confirmación.

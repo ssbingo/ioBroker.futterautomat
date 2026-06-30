@@ -246,9 +246,12 @@ activé puis désactivé, et signale pour chaque distribution l'un des trois ré
 
 | Résultat | Signification | Message |
 |----------|-----------|---------|
-| ✅ Succès | L'interrupteur s'est activé puis désactivé comme prévu | « Fütterung wurde für x s ausgelöst. » |
-| ❌ Échec de l'activation | L'interrupteur n'a jamais confirmé l'état ACTIVÉ | « Fütterung konnte nicht durchgeführt werden. Schalter prüfen! » |
-| ❌ Échec de la désactivation | Il s'est activé mais ne s'est pas désactivé de nouveau | « Störung Abschaltung Futterautomat! » |
+| ✅ Succès | L'interrupteur s'est activé puis désactivé comme prévu | « Distribution déclenchée pour x s. » |
+| ❌ Échec de l'activation | L'interrupteur n'a jamais confirmé l'état ACTIVÉ | « La distribution n'a pas pu être effectuée. Vérifiez l'interrupteur ! » |
+| ❌ Échec de la désactivation | Il s'est activé mais ne s'est pas désactivé de nouveau | « Défaut : le distributeur ne s'est pas éteint ! » |
+
+> Le message est envoyé dans la langue système ioBroker configurée (anglais par défaut).
+
 
 * **Vérifier que l'interrupteur s'active et se désactive réellement** — active la surveillance.
 * **Délai d'attente de la surveillance (secondes)** — combien de temps attendre la confirmation.

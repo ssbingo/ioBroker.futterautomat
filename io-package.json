@@ -1,34 +1,34 @@
 {
 	"common": {
 		"name": "automatic-feeder",
-		"version": "0.2.0",
+		"version": "0.3.0",
 		"news": {
-			"0.2.0": {
-				"en": "Renamed the adapter to \"Automatic Feeder\" (technical name automatic-feeder). This is a fresh adapter id; reinstall and reconfigure (no automatic migration from futterautomat).",
-				"de": "Adapter umbenannt in \"Automatic Feeder\" (technischer Name automatic-feeder). Neue Adapter-ID; bitte neu installieren und konfigurieren (keine automatische Migration von futterautomat).",
-				"ru": "Адаптер переименован в \"Automatic Feeder\" (техн_имя automatic-feeder). Это новый id адаптера; переустановите и настройте заново (без автоматической миграции из futterautomat).",
-				"pt": "Adaptador renomeado para \"Automatic Feeder\" (nome técnico automatic-feeder). É um novo id de adaptador; reinstale e reconfigure (sem migração automática de futterautomat).",
-				"nl": "Adapter hernoemd naar \"Automatic Feeder\" (technische naam automatic-feeder). Nieuwe adapter-id; opnieuw installeren en configureren (geen automatische migratie van futterautomat).",
-				"fr": "Adaptateur renommé en \"Automatic Feeder\" (nom technique automatic-feeder). Nouvel id d'adaptateur ; réinstallez et reconfigurez (pas de migration automatique depuis futterautomat).",
-				"it": "Adattatore rinominato in \"Automatic Feeder\" (nome tecnico automatic-feeder). Nuovo id adattatore; reinstalla e riconfigura (nessuna migrazione automatica da futterautomat).",
-				"es": "Adaptador renombrado a \"Automatic Feeder\" (nombre técnico automatic-feeder). Nuevo id de adaptador; reinstala y reconfigura (sin migración automática desde futterautomat).",
-				"pl": "Adapter przemianowany na \"Automatic Feeder\" (nazwa techniczna automatic-feeder). Nowy id adaptera; zainstaluj ponownie i skonfiguruj (bez automatycznej migracji z futterautomat).",
-				"uk": "Адаптер перейменовано на \"Automatic Feeder\" (технічна назва automatic-feeder). Новий id адаптера; перевстановіть і налаштуйте заново (без автоматичної міграції з futterautomat).",
-				"zh-cn": "适配器更名为 \"Automatic Feeder\"（技术名 automatic-feeder）。这是新的适配器 id；请重新安装并配置（不会从 futterautomat 自动迁移）。"
+			"0.3.0": {
+				"en": "Notification messages (Telegram, lastResult) and block reasons are now localized into all 11 languages; the text follows the system language and defaults to English. Translated the adapter title (titleLang).",
+				"de": "Benachrichtigungen (Telegram, lastResult) und Sperrgründe werden jetzt in alle 11 Sprachen lokalisiert; der Text folgt der Systemsprache, Standard Englisch. Adaptertitel (titleLang) übersetzt.",
+				"ru": "Уведомления (Telegram, lastResult) и причины блокировки теперь локализованы на все 11 языков; текст следует системному языку, по умолчанию английский. Переведён заголовок адаптера (titleLang).",
+				"pt": "As mensagens de notificação (Telegram, lastResult) e os motivos de bloqueio agora são localizados em todos os 11 idiomas; o texto segue o idioma do sistema, padrão inglês. Título do adaptador (titleLang) traduzido.",
+				"nl": "Meldingen (Telegram, lastResult) en blokkeerredenen worden nu in alle 11 talen gelokaliseerd; de tekst volgt de systeemtaal, standaard Engels. Adaptertitel (titleLang) vertaald.",
+				"fr": "Les messages de notification (Telegram, lastResult) et les raisons de blocage sont désormais traduits dans les 11 langues ; le texte suit la langue système, anglais par défaut. Titre de l'adaptateur (titleLang) traduit.",
+				"it": "I messaggi di notifica (Telegram, lastResult) e i motivi di blocco sono ora localizzati in tutte le 11 lingue; il testo segue la lingua di sistema, inglese predefinito. Titolo dell'adattatore (titleLang) tradotto.",
+				"es": "Los mensajes de notificación (Telegram, lastResult) y los motivos de bloqueo ahora están localizados en los 11 idiomas; el texto sigue el idioma del sistema, inglés por defecto. Título del adaptador (titleLang) traducido.",
+				"pl": "Powiadomienia (Telegram, lastResult) i powody blokady są teraz tłumaczone na wszystkie 11 języków; tekst zależy od języka systemu, domyślnie angielski. Przetłumaczono tytuł adaptera (titleLang).",
+				"uk": "Сповіщення (Telegram, lastResult) та причини блокування тепер локалізовані всіма 11 мовами; текст залежить від системної мови, за замовчуванням англійська. Перекладено заголовок адаптера (titleLang).",
+				"zh-cn": "通知消息（Telegram、lastResult）和阻止原因现在已本地化为全部 11 种语言；文本跟随系统语言，默认英语。已翻译适配器标题（titleLang）。"
 			}
 		},
 		"titleLang": {
 			"en": "Automatic Feeder",
-			"de": "Automatic Feeder",
-			"ru": "Automatic Feeder",
-			"pt": "Automatic Feeder",
-			"nl": "Automatic Feeder",
-			"fr": "Automatic Feeder",
-			"it": "Automatic Feeder",
-			"es": "Automatic Feeder",
-			"pl": "Automatic Feeder",
-			"uk": "Automatic Feeder",
-			"zh-cn": "Automatic Feeder"
+			"de": "Futterautomat",
+			"ru": "Автоматическая кормушка",
+			"pt": "Alimentador automático",
+			"nl": "Voederautomaat",
+			"fr": "Distributeur automatique",
+			"it": "Alimentatore automatico",
+			"es": "Comedero automático",
+			"pl": "Automat do karmienia",
+			"uk": "Автоматична годівниця",
+			"zh-cn": "自动喂食器"
 		},
 		"desc": {
 			"en": "Scheduled automatic feeder: switches an existing ioBroker state for a set duration, with temperature and day/night limits.",
@@ -49,9 +49,8 @@
 		"keywords": [
 			"Automatic Feeder",
 			"feeder",
-			"Futterautomat",
 			"Koi",
-			"Fisch"
+			"Fish"
 		],
 		"licenseInformation": {
 			"type": "free",

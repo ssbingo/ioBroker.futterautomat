@@ -236,9 +236,12 @@ state, and report one of three results per feeding:
 
 | Result | Meaning | Message |
 |--------|---------|---------|
-| ✅ success | switch turned on and off as expected | "Fütterung wurde für x s ausgelöst." |
-| ❌ on failed | the switch never confirmed the ON state | "Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ off failed | it turned on, but did not turn off again | "Störung Abschaltung Futterautomat!" |
+| ✅ success | switch turned on and off as expected | "Feeding triggered for x s." |
+| ❌ on failed | the switch never confirmed the ON state | "Feeding could not be performed. Check the switch!" |
+| ❌ off failed | it turned on, but did not turn off again | "Fault: the feeder did not switch off!" |
+
+> The message is sent in the configured ioBroker system language (English by default).
+
 
 * **Verify that the switch actually turns on and off** – enables the supervision.
 * **Verification timeout (seconds)** – how long to wait for the confirmation.
@@ -379,6 +382,11 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 	### **WORK IN PROGRESS**
 -->
 
+### 0.3.0 (2026-06-30)
+* (ssbingo) Localize the feeding result messages (Telegram and the `lastResult` data point) and the block reasons (`blockReason`) into all 11 ioBroker languages; the text now follows the configured system language and defaults to English
+* (ssbingo) Translate the adapter title (`titleLang`) into all 11 languages
+* (ssbingo) Clean up the package keywords (removed "Futterautomat"; "Fisch" → "Fish")
+
 ### 0.2.0 (2026-06-29)
 * (ssbingo) Renamed the adapter to **Automatic Feeder** (technical name `automatic-feeder`, npm `iobroker.automatic-feeder`, namespace `automatic-feeder.0`). This is a new adapter id — reinstall and reconfigure; there is no automatic migration from `futterautomat`.
 
@@ -417,16 +425,6 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 ### 0.1.1 (2026-06-29)
 * (ssbingo) Raised the minimum Node.js version to >= 22 (Node 20 is no longer used)
 * (ssbingo) Enabled npm releases via trusted publishing (OIDC) in the GitHub Actions workflow
-
-### 0.1.0 (2026-06-29)
-* (ssbingo) Scheduled feeding for up to 5 freely selectable switches (fixed times or interval within a time window)
-* (ssbingo) Configurable feeding duration per switch; configurable on/off values
-* (ssbingo) Temperature blocking (water/air, below/above) and night protection via sunrise/sunset with offsets
-* (ssbingo) Mandatory geolocation: system settings or address search + OpenStreetMap map
-* (ssbingo) Switching supervision (verify on/off, ack=true) with per-switch Telegram notifications
-* (ssbingo) Manual feeding via a "Feed now" button (selectable duration) and the feedNow data point
-* (ssbingo) Status data points (lastResult, error, nextFeeding, …) and detailed level-based logging
-* (ssbingo) Full user manual in all 11 languages
 
 ---
 

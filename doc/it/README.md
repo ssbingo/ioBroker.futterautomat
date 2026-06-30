@@ -241,9 +241,12 @@ risultati:
 
 | Risultato | Significato | Messaggio |
 |----------|-----------|---------|
-| ✅ Successo | L'interruttore si è acceso e spento come previsto | „Fütterung wurde für x s ausgelöst." |
-| ❌ Accensione fallita | L'interruttore non ha mai confermato lo stato ACCESO | „Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ Spegnimento fallito | si è acceso ma non si è più spento | „Störung Abschaltung Futterautomat!" |
+| ✅ Successo | L'interruttore si è acceso e spento come previsto | „Alimentazione attivata per x s." |
+| ❌ Accensione fallita | L'interruttore non ha mai confermato lo stato ACCESO | „Impossibile eseguire l'alimentazione. Controllare l'interruttore!" |
+| ❌ Spegnimento fallito | si è acceso ma non si è più spento | „Guasto: l'alimentatore non si è spento!" |
+
+> Il messaggio viene inviato nella lingua di sistema di ioBroker configurata (inglese per impostazione predefinita).
+
 
 * **Verifica che l'interruttore si accenda e spenga effettivamente** – attiva il monitoraggio.
 * **Timeout di monitoraggio (secondi)** – per quanto tempo si attende la conferma.

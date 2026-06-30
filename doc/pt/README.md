@@ -225,9 +225,12 @@ de ligado e desligado, e reporta por alimentação um de três resultados:
 
 | Resultado | Significado | Mensagem |
 |----------|-----------|---------|
-| ✅ Sucesso | O interruptor ligou e desligou conforme esperado | „Fütterung wurde für x s ausgelöst." |
-| ❌ Falha ao ligar | O interruptor nunca confirmou o estado LIGADO | „Fütterung konnte nicht durchgeführt werden. Schalter prüfen!" |
-| ❌ Falha ao desligar | Ele ligou, mas não desligou novamente | „Störung Abschaltung Futterautomat!" |
+| ✅ Sucesso | O interruptor ligou e desligou conforme esperado | „Alimentação acionada por x s." |
+| ❌ Falha ao ligar | O interruptor nunca confirmou o estado LIGADO | „Não foi possível alimentar. Verifique o interruptor!" |
+| ❌ Falha ao desligar | Ele ligou, mas não desligou novamente | „Falha: o alimentador não desligou!" |
+
+> A mensagem é enviada no idioma do sistema ioBroker configurado (inglês por padrão).
+
 
 * **Verificar se o interruptor realmente liga e desliga** – ativa o monitoramento.
 * **Timeout do monitoramento (segundos)** – por quanto tempo se aguarda a confirmação.
