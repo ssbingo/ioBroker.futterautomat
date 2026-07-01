@@ -226,7 +226,7 @@ blokuje.)
 Dla każdego przełącznika można zdefiniować cykliczną **przerwę zimową** (sezonową, jako daty `MM-DD`, które powtarzają się co roku i mogą przechodzić przez Nowy Rok).
 
 * **Włącz przerwę zimową** – włączyć przerwę.
-* **Początek / Koniec (MM-DD)** – sezon, np. od `11-01` do `03-15`.
+* **Początek / Koniec zimy** – wybierz dzień i miesiąc z kalendarza (wyświetlane jako dd.mm), np. od 01.11 do 15.03.
 * **Tryb** – podczas przerwy **wstrzymaj karmienie**, karm z własnym **ograniczonym** interwałem lub **raz dziennie** o ustalonej godzinie; obowiązuje własny **czas karmienia zimą**.
 * **Przypomnienia (Telegram)** – w dniach przed rozpoczęciem i przed zakończeniem codziennie (ostatni raz w danym dniu) o ustawionej godzinie wysyłane jest przypomnienie. Wymaga instancji Telegram (patrz poniżej).
 

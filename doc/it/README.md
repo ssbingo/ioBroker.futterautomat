@@ -238,7 +238,7 @@ sorgente non blocca.)
 Per ogni interruttore è possibile definire una **pausa invernale** ricorrente (stagionale, come date `MM-GG` che si ripetono ogni anno e possono attraversare il Capodanno).
 
 * **Attiva la pausa invernale** – attivare la pausa.
-* **Inizio / Fine (MM-GG)** – la stagione, ad es. dal `11-01` al `03-15`.
+* **Inizio / Fine inverno** – scegli giorno e mese da un calendario (mostrato come gg.mm), ad es. dal 01.11 al 15.03.
 * **Modalità** – durante la pausa, **sospendi l'alimentazione**, alimenta con un intervallo proprio **ridotto** oppure **una volta al giorno** a un orario fisso; si applica una **durata di alimentazione invernale** propria.
 * **Promemoria (Telegram)** – nei giorni prima dell'inizio e prima della fine viene inviato ogni giorno (l'ultima volta nel giorno stesso) un promemoria all'ora configurata. Richiede un'istanza Telegram (vedi sotto).
 

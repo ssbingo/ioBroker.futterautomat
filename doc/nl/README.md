@@ -223,7 +223,7 @@ bron niet.)
 Per schakelaar kun je een terugkerende **winterpauze** instellen (seizoensgebonden, als `MM-DD`-data die zich jaarlijks herhalen en over de jaarwisseling kunnen lopen).
 
 * **Winterpauze inschakelen** – de pauze inschakelen.
-* **Begin / Einde (MM-DD)** – het seizoen, bijv. `11-01` tot `03-15`.
+* **Winterbegin / Wintereinde** – kies dag en maand uit een kalender (weergegeven als dd.mm), bijv. 01.11 tot 15.03.
 * **Modus** – tijdens de pauze **voeding onderbreken**, voeden met een **beperkt** eigen interval of **één keer per dag** op een vast tijdstip; er geldt een eigen **wintervoederduur**.
 * **Herinneringen (Telegram)** – in de dagen vóór het begin en vóór het einde wordt dagelijks (voor het laatst op de dag zelf) op het ingestelde uur een herinnering verzonden. Vereist een Telegram-instantie (zie hieronder).
 

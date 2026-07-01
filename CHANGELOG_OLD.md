@@ -3,6 +3,9 @@
 Changelog entries that were moved out of [README.md](README.md) (it keeps the latest 10) are
 collected here.
 
+### 0.1.4 (2026-06-29)
+* (ssbingo) Fully translate the admin UI into all supported languages (repository checker E5606)
+
 ### 0.1.3 (2026-06-29)
 * (ssbingo) Use this.setTimeout/this.clearTimeout instead of global timers (repository checker E5005)
 * (ssbingo) CI: run check-and-lint and deploy on Node 24; adapter-tests now needs check-and-lint

@@ -223,7 +223,7 @@ fonte não bloqueia.)
 Para cada interruptor pode definir uma **pausa de inverno** recorrente (sazonal, como datas `MM-DD` que se repetem todos os anos e podem atravessar o Ano Novo).
 
 * **Ativar pausa de inverno** – ligar a pausa.
-* **Início / Fim (MM-DD)** – a estação, por exemplo de `11-01` a `03-15`.
+* **Início / Fim do inverno** – escolha o dia e o mês num calendário (mostrado como dd.mm), por exemplo de 01.11 a 15.03.
 * **Modo** – durante a pausa, **suspender a alimentação**, alimentar com um intervalo próprio **reduzido** ou **uma vez por dia** a uma hora definida; aplica-se uma **duração de alimentação de inverno** própria.
 * **Lembretes (Telegram)** – nos dias antes do início e antes do fim é enviado diariamente (a última vez no próprio dia) um lembrete à hora configurada. Precisa de uma instância do Telegram (veja abaixo).
 

@@ -23,7 +23,40 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import 'dayjs/locale/de';
+import 'dayjs/locale/ru';
+import 'dayjs/locale/pt';
+import 'dayjs/locale/nl';
+import 'dayjs/locale/fr';
+import 'dayjs/locale/it';
+import 'dayjs/locale/es';
+import 'dayjs/locale/pl';
+import 'dayjs/locale/uk';
+import 'dayjs/locale/zh-cn';
 import { I18n } from '@iobroker/adapter-react-v5';
+
+// leap year so 29.02. is selectable; only day+month are stored (recurring MM-DD)
+const WINTER_REF_YEAR = 2024;
+
+/** Parses a stored recurring "MM-DD" into a dayjs date (fixed reference year), or null. */
+function mdToDayjs(md) {
+	const m = typeof md === 'string' && md.match(/^(\d{1,2})-(\d{1,2})$/);
+	if (!m) {
+		return null;
+	}
+	const mm = String(Number(m[1])).padStart(2, '0');
+	const dd = String(Number(m[2])).padStart(2, '0');
+	const d = dayjs(`${WINTER_REF_YEAR}-${mm}-${dd}`);
+	return d.isValid() ? d : null;
+}
+
+/** Formats a dayjs date back to the stored "MM-DD" (empty string when null/invalid). */
+function dayjsToMD(d) {
+	return d && d.isValid() ? d.format('MM-DD') : '';
+}
 
 function Section({ title, children }) {
 	return (
@@ -325,24 +358,28 @@ function SwitchTab(props) {
 					}
 					label={I18n.t('Enable winter pause')}
 				/>
-				<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 1 }}>
-					<TextField
-						variant="standard"
-						label={I18n.t('Start (MM-DD)')}
-						placeholder="MM-DD"
-						disabled={!sw.winterEnabled}
-						value={sw.winterStart || ''}
-						onChange={(e) => onChange({ winterStart: e.target.value })}
-					/>
-					<TextField
-						variant="standard"
-						label={I18n.t('End (MM-DD)')}
-						placeholder="MM-DD"
-						disabled={!sw.winterEnabled}
-						value={sw.winterEnd || ''}
-						onChange={(e) => onChange({ winterEnd: e.target.value })}
-					/>
-				</Box>
+				<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={I18n.getLanguage()}>
+					<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 1 }}>
+						<DatePicker
+							label={I18n.t('Winter start')}
+							views={['month', 'day']}
+							format="DD.MM"
+							disabled={!sw.winterEnabled}
+							value={mdToDayjs(sw.winterStart)}
+							onChange={(v) => onChange({ winterStart: dayjsToMD(v) })}
+							slotProps={{ textField: { variant: 'standard', size: 'small', sx: { width: 160 } } }}
+						/>
+						<DatePicker
+							label={I18n.t('Winter end')}
+							views={['month', 'day']}
+							format="DD.MM"
+							disabled={!sw.winterEnabled}
+							value={mdToDayjs(sw.winterEnd)}
+							onChange={(v) => onChange({ winterEnd: dayjsToMD(v) })}
+							slotProps={{ textField: { variant: 'standard', size: 'small', sx: { width: 160 } } }}
+						/>
+					</Box>
+				</LocalizationProvider>
 
 				<RadioGroup
 					row

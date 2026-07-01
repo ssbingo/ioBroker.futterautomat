@@ -1,20 +1,20 @@
 {
 	"common": {
 		"name": "automatic-feeder",
-		"version": "0.5.0",
+		"version": "0.5.1",
 		"news": {
-			"0.5.0": {
-				"en": "New per-switch Winter pause: suspend or reduce feeding during a recurring season (MM-DD), with optional Telegram reminders before it starts and ends.",
-				"de": "Neue Winterpause je Schalter: Fütterung in einer wiederkehrenden Saison (MM-TT) aussetzen oder reduzieren, mit optionalen Telegram-Erinnerungen vor Beginn und Ende.",
-				"ru": "Новая зимняя пауза для каждого переключателя: приостановка или сокращение кормления в повторяющийся сезон (ММ-ДД) с необязательными напоминаниями в Telegram перед началом и окончанием.",
-				"pt": "Nova pausa de inverno por interruptor: suspender ou reduzir a alimentação numa estação recorrente (MM-DD), com lembretes opcionais do Telegram antes do início e do fim.",
-				"nl": "Nieuwe winterpauze per schakelaar: voeding onderbreken of verminderen in een terugkerend seizoen (MM-DD), met optionele Telegram-herinneringen voor het begin en einde.",
-				"fr": "Nouvelle pause hivernale par interrupteur : suspendre ou réduire l'alimentation pendant une saison récurrente (MM-JJ), avec des rappels Telegram facultatifs avant le début et la fin.",
-				"it": "Nuova pausa invernale per interruttore: sospendere o ridurre l'alimentazione in una stagione ricorrente (MM-GG), con promemoria Telegram opzionali prima dell'inizio e della fine.",
-				"es": "Nueva pausa de invierno por interruptor: suspender o reducir la alimentación en una temporada recurrente (MM-DD), con recordatorios opcionales de Telegram antes del inicio y del fin.",
-				"pl": "Nowa przerwa zimowa dla każdego przełącznika: wstrzymanie lub ograniczenie karmienia w cyklicznym sezonie (MM-DD), z opcjonalnymi przypomnieniami Telegram przed rozpoczęciem i zakończeniem.",
-				"uk": "Нова зимова пауза для кожного перемикача: призупинення або зменшення годування у повторюваний сезон (ММ-ДД) з необовʼязковими нагадуваннями в Telegram перед початком і завершенням.",
-				"zh-cn": "新增每个开关的冬季暂停：在重复的季节（MM-DD）暂停或减量投喂，并可在开始和结束前发送 Telegram 提醒。"
+			"0.5.1": {
+				"en": "Admin UI: winter pause start/end are now chosen from a calendar (day + month, shown as dd.mm) instead of a text field.",
+				"de": "Admin-UI: Beginn/Ende der Winterpause werden jetzt über einen Kalender gewählt (Tag + Monat, Anzeige als tt.mm) statt über ein Textfeld.",
+				"ru": "Интерфейс администратора: начало/конец зимней паузы теперь выбираются в календаре (день + месяц, отображается как дд.мм) вместо текстового поля.",
+				"pt": "IU do administrador: o início/fim da pausa de inverno agora são escolhidos num calendário (dia + mês, mostrado como dd.mm) em vez de um campo de texto.",
+				"nl": "Admin-UI: begin/einde van de winterpauze worden nu via een kalender gekozen (dag + maand, weergegeven als dd.mm) in plaats van een tekstveld.",
+				"fr": "Interface d'administration : le début/la fin de la pause hivernale se choisissent désormais dans un calendrier (jour + mois, affiché en jj.mm) au lieu d'un champ texte.",
+				"it": "Interfaccia di amministrazione: l'inizio/la fine della pausa invernale ora si scelgono da un calendario (giorno + mese, mostrato come gg.mm) invece che da un campo di testo.",
+				"es": "Interfaz de administración: el inicio/fin de la pausa de invierno ahora se eligen en un calendario (día + mes, mostrado como dd.mm) en lugar de un campo de texto.",
+				"pl": "Interfejs administratora: początek/koniec przerwy zimowej wybiera się teraz z kalendarza (dzień + miesiąc, wyświetlane jako dd.mm) zamiast z pola tekstowego.",
+				"uk": "Інтерфейс адміністратора: початок/кінець зимової паузи тепер обираються в календарі (день + місяць, відображається як дд.мм) замість текстового поля.",
+				"zh-cn": "管理界面：冬季暂停的开始/结束现在通过日历选择（日 + 月，显示为 dd.mm），不再使用文本框。"
 			}
 		},
 		"titleLang": {

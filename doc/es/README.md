@@ -239,7 +239,7 @@ escribe en `blockReason`. (Si un valor de temperatura es desconocido, esa fuente
 Para cada interruptor puedes definir una **pausa de invierno** recurrente (estacional, como fechas `MM-DD` que se repiten cada año y pueden cruzar el Año Nuevo).
 
 * **Activar la pausa de invierno** – activar la pausa.
-* **Inicio / Fin (MM-DD)** – la temporada, p. ej. del `11-01` al `03-15`.
+* **Inicio / Fin del invierno** – elige el día y el mes en un calendario (se muestra como dd.mm), p. ej. del 01.11 al 15.03.
 * **Modo** – durante la pausa, **suspender la alimentación**, alimentar con un intervalo propio **reducido** o **una vez al día** a una hora fija; se aplica una **duración de alimentación de invierno** propia.
 * **Recordatorios (Telegram)** – en los días previos al inicio y al fin se envía cada día (la última vez el mismo día) un recordatorio a la hora configurada. Necesita una instancia de Telegram (ver abajo).
 

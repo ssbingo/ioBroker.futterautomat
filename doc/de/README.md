@@ -223,7 +223,7 @@ Quelle nicht.)
 Pro Schalter lässt sich eine wiederkehrende **Winterpause** definieren (saisonal, als `MM-TT`-Daten, die sich jährlich wiederholen und über den Jahreswechsel reichen können).
 
 * **Winterpause aktivieren** – die Pause einschalten.
-* **Beginn / Ende (MM-TT)** – die Saison, z. B. `11-01` bis `03-15`.
+* **Winterbeginn / Winterende** – Tag und Monat aus einem Kalender wählen (Anzeige als tt.mm), z. B. 01.11 bis 15.03.
 * **Modus** – während der Pause entweder **Fütterung aussetzen**, mit **eingeschränktem** eigenem Intervall füttern oder **einmal täglich** zu einer festen Zeit; es gilt eine eigene **Winter-Fütterdauer**.
 * **Erinnerungen (Telegram)** – in den Tagen vor Beginn und vor Ende wird täglich (letztmalig am Stichtag) zur eingestellten Uhrzeit eine Erinnerung gesendet. Benötigt eine Telegram-Instanz (siehe unten).
 

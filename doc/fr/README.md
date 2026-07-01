@@ -244,7 +244,7 @@ source ne bloque pas.)
 Pour chaque interrupteur, vous pouvez définir une **pause hivernale** récurrente (saisonnière, sous forme de dates `MM-JJ` qui se répètent chaque année et peuvent chevaucher le Nouvel An).
 
 * **Activer la pause hivernale** – activer la pause.
-* **Début / Fin (MM-JJ)** – la saison, par ex. du `11-01` au `03-15`.
+* **Début / Fin de l'hiver** – choisissez le jour et le mois dans un calendrier (affiché en jj.mm), par ex. du 01.11 au 15.03.
 * **Mode** – pendant la pause, **suspendre l'alimentation**, alimenter avec un intervalle propre **réduit** ou **une fois par jour** à une heure fixe ; une **durée d'alimentation hivernale** propre s'applique.
 * **Rappels (Telegram)** – dans les jours précédant le début et la fin, un rappel est envoyé chaque jour (la dernière fois le jour même) à l'heure configurée. Nécessite une instance Telegram (voir ci-dessous).
 
