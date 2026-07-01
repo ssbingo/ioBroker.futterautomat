@@ -158,6 +158,29 @@ function asCommonType(t) {
 }
 
 /**
+ * Maps a read-only display role to its writable counterpart. The repository
+ * checker (E1011) requires `common.write = false` for the read-only roles
+ * `value`, `value.temperature` and `indicator`; the editable settings mirror
+ * uses the writable equivalents instead (`level`, `level.temperature`, `switch`).
+ * `text` and any other role are already write-friendly and stay unchanged.
+ *
+ * @param {string} role - the descriptor's read-only role
+ * @returns {string} the writable role to use for an editable state
+ */
+function writableRole(role) {
+	if (role === 'value.temperature') {
+		return 'level.temperature';
+	}
+	if (role === 'value') {
+		return 'level';
+	}
+	if (role === 'indicator') {
+		return 'switch';
+	}
+	return role;
+}
+
+/**
  * Editable mirror of the per-switch configuration, exposed under
  * `switches.<id>.settings.*` so the settings are visible in the object tree / VIS.
  * Writing a value there applies it to the instance config (see the settings-write
@@ -1096,20 +1119,22 @@ class AutomaticFeeder extends utils.Adapter {
 			});
 			for (const s of SWITCH_SETTINGS) {
 				const writable = !SETTINGS_READONLY.has(s.id);
+				// writable states must not carry a read-only role (repochecker E1011)
+				const role = writable ? writableRole(s.role) : s.role;
 				await this.setObjectNotExistsAsync(`${base}.settings.${s.id}`, {
 					type: 'state',
 					common: {
 						name: s.name,
 						type: asCommonType(s.type),
-						role: s.role,
+						role,
 						read: true,
 						write: writable,
 						...(s.unit ? { unit: s.unit } : {}),
 					},
 					native: {},
 				});
-				// keep write flag in sync for objects created by older versions
-				await this.extendObjectAsync(`${base}.settings.${s.id}`, { common: { write: writable } });
+				// keep role + write flag in sync for objects created by older versions
+				await this.extendObjectAsync(`${base}.settings.${s.id}`, { common: { role, write: writable } });
 				await this.setStateAsync(`${base}.settings.${s.id}`, { val: s.get(sw), ack: true });
 			}
 		}

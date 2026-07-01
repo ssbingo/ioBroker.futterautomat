@@ -460,6 +460,9 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 	### **WORK IN PROGRESS**
 -->
 
+### 1.0.2 (2026-07-01)
+* (ssbingo) Fix (repository checker E1011): the editable `settings.*` mirror combined read-only state roles (`value` / `value.temperature` / `indicator`) with `write = true`. Writable settings now use the writable roles `level` / `level.temperature` / `switch`; existing objects are corrected automatically on start
+
 ### 1.0.1 (2026-07-01)
 * (ssbingo) Fix: switches created by an older version were missing the dynamic-feeding defaults (Q10, base/min/max interval and duration, averaging window, hysteresis), so dynamic feeding computed a 0 interval and never fed. The missing per-switch defaults are now filled in automatically on start
 * (ssbingo) When dynamic feeding is enabled but no valid interval can be computed (base/max interval 0 or an invalid time window), the adapter now logs a warning and shows a hint in `status.blockReason` instead of silently doing nothing
@@ -497,10 +500,6 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 
 ### 0.4.1 (2026-06-30)
 * (ssbingo) Admin UI: adding a switch no longer jumps to its (still empty) tab — the focus stays on the General settings tab so the switch object can be selected first; the new row is scrolled into view
-
-### 0.4.0 (2026-06-30)
-* (ssbingo) More reliable switch supervision for devices with delayed status feedback (e.g. Homematic radio): each verification now actively reads the current acknowledged state back and performs several staggered re-checks before reporting a fault, instead of failing after a single timeout
-* (ssbingo) New per-switch option "Verification attempts" (default 3) to configure the number of staggered re-checks
 
 ---
 
