@@ -281,16 +281,20 @@ function SwitchTab(props) {
 				)}
 			</Section>
 
-			{/* Duration & values */}
+			{/* Duration & values. The static feeding duration is hidden under dynamic
+			    feeding, where it is computed from temperature (it would only confuse);
+			    the on/off values stay visible because they are always relevant. */}
 			<Section title={I18n.t('Feeding action')}>
 				<Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-					<TextField
-						variant="standard"
-						type="number"
-						label={I18n.t('Feeding duration (seconds)')}
-						value={sw.durationSec ?? 5}
-						onChange={(e) => onChange({ durationSec: Number(e.target.value) || 0 })}
-					/>
+					{sw.dynamicEnabled ? null : (
+						<TextField
+							variant="standard"
+							type="number"
+							label={I18n.t('Feeding duration (seconds)')}
+							value={sw.durationSec ?? 5}
+							onChange={(e) => onChange({ durationSec: Number(e.target.value) || 0 })}
+						/>
+					)}
 					<TextField
 						variant="standard"
 						label={I18n.t('On value (default true)')}

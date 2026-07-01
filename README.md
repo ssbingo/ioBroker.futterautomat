@@ -469,6 +469,9 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 	### **WORK IN PROGRESS**
 -->
 
+### 1.1.1 (2026-07-01)
+* (ssbingo) Admin UI: under dynamic feeding the static **Feeding duration** field is now hidden (the duration is computed from temperature there, so the static value only confused); the on/off values stay visible
+
 ### 1.1.0 (2026-07-01)
 * (ssbingo) New per-switch **astronomical feeding window**: restrict feeding to the daytime window (sunrise/sunset with per-switch offsets). For *Interval* and *Dynamic feeding* it becomes the feeding window; for *Fixed times* it acts as a day/night guard. Replaces the former per-switch "do not feed at night"
 * (ssbingo) The **location** can now be taken from the system settings, set once as a shared location, or configured **individually per switch** (feeding stations at different places); the sunrise/sunset offsets moved from the general page to each switch
@@ -508,11 +511,6 @@ log level (Instances → automatic-feeder.x → log level) to **debug** or **sil
 
 ### 0.5.1 (2026-07-01)
 * (ssbingo) Admin UI: the winter pause start/end are now picked from a **calendar** (day + month, shown as dd.mm) instead of a raw MM-DD text field (adds @mui/x-date-pickers + dayjs)
-
-### 0.5.0 (2026-07-01)
-* (ssbingo) New per-switch **Winter pause**: during a recurring season (given as MM-DD dates that repeat every year and may wrap around New Year) feeding can be suspended, run on a reduced own interval, or once daily, each with its own winter feeding duration
-* (ssbingo) Optional **Telegram reminders** a configurable number of days before the winter pause starts and ends (sent once daily up to and including the day itself, at a configurable hour), with mode-dependent texts in all 11 languages
-* (ssbingo) New status data point `winterActive` per switch
 
 ---
 
